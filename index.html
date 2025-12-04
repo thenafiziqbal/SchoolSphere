@@ -1,139 +1,105 @@
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolSphere web</title>
+    <title>SchoolSphere</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/jspdf-autotable@3.5.23/dist/jspdf.autotable.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Libraries -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://unpkg.com/jspdf-autotable@3.5.23/dist/jspdf.autotable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
     :root {
-        --primary-color: #00a8ff;
-        --secondary-color: #9c88ff;
-        --accent-color: #fbc531;
-        --bg-color: #1e272e;
-        --sidebar-bg: #2d3436;
-        --text-color: #d2dae2;
-        --card-bg: #2f3542;
-        --success-color: #4cd137;
-        --danger-color: #e84118;
-        --warning-color: #f53b57;
-        --premium-color: #e1b12c;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-        --border-radius: 12px;
+        --primary-color: #4a69bd;
+        --secondary-color: #5d6d7e;
+        --accent-color: #1abc9c;
+        --bg-color: #f4f7f6;
+        --sidebar-bg: #2c3e50;
+        --text-color: #34495e;
+        --card-bg: #ffffff;
+        --success-color: #2ecc71;
+        --danger-color: #e74c3c;
+        --warning-color: #f39c12;
+        --premium-color: #f1c40f;
+        --shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+        --border-radius: 10px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Poppins', 'Noto Sans Bengali', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-    #login-container { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #0984e3, #6c5ce7); padding: 15px; }
-    #login-box { background: var(--card-bg); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow); width: 90%; max-width: 450px; text-align: center; animation: fadeIn 0.5s; border: 1px solid var(--primary-color); }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+    #login-container { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #667eea, #764ba2); }
+    #login-box { background: var(--card-bg); padding: 40px; border-radius: var(--border-radius); box-shadow: var(--shadow); width: 90%; max-width: 420px; text-align: center; animation: fadeIn 0.5s; }
     #login-box h2 { margin-bottom: 25px; color: var(--primary-color); }
     .input-group { display: flex; flex-direction: column; margin-bottom: 15px; text-align: left; }
-    .input-group label { margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; color: var(--accent-color); }
-    .input-group input, .input-group select, .input-group textarea { padding: 12px; border: 1px solid #57606f; border-radius: 8px; font-size: 1rem; width: 100%; transition: all 0.3s; background-color: #3b4252; color: var(--text-color); }
-    .input-group input:focus, .input-group select:focus { border-color: var(--primary-color); outline: none; box-shadow: 0 0 10px rgba(0, 168, 255, 0.5); }
-    .btn { padding: 12px 25px; border: none; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.3s; width: 100%; margin-top: 10px; }
-    .btn:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 5px 15px rgba(0, 168, 255, 0.3); }
-    .btn:disabled { background: #57606f; cursor: not-allowed; }
-    #app-wrapper, #student-app-wrapper { display: none; flex-direction: row; }
+    .input-group label { margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+    .input-group input, .input-group select, .input-group textarea { padding: 12px; border: 1px solid #dfe6e9; border-radius: 8px; font-size: 1rem; width: 100%; transition: border-color 0.3s; }
+    .input-group input:focus, .input-group select:focus { border-color: var(--primary-color); outline: none; }
+    .btn { padding: 12px 25px; border: none; background-color: var(--primary-color); color: white; border-radius: 8px; cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.3s; width: 100%; margin-top: 10px; }
+    .btn:hover { background-color: #3b5998; transform: translateY(-2px); }
+    .btn:disabled { background-color: #95a5a6; cursor: not-allowed; }
+    #app-wrapper { display: none; flex-direction: row; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-    .sidebar { width: 260px; background-color: var(--sidebar-bg); color: white; display: flex; flex-direction: column; height: 100vh; position: fixed; z-index: 1000; transition: transform 0.3s ease-in-out; box-shadow: 5px 0 25px rgba(0,0,0,0.3); border-right: 1px solid var(--primary-color); }
+    .sidebar { width: 260px; background-color: var(--sidebar-bg); color: white; display: flex; flex-direction: column; height: 100vh; position: fixed; z-index: 1000; transition: transform 0.3s ease-in-out; box-shadow: 2px 0 15px rgba(0,0,0,0.1); }
     .sidebar-header { display: flex; align-items: center; padding: 20px 15px; border-bottom: 1px solid #4a627a; flex-direction: column; text-align: center; }
-    #school-logo, #student-profile-pic-sidebar { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px; object-fit: cover; background: #fff; border: 3px solid var(--primary-color); }
-    #school-name-display, #student-name-sidebar { font-size: 1.2rem; font-weight: 600; color: var(--accent-color); }
-    #user-role-display, #student-class-sidebar { font-size: 0.9rem; color: #bdc3c7; }
+    #school-logo { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px; object-fit: cover; background: #fff; border: 3px solid var(--bg-color); }
+    #school-name-display { font-size: 1.2rem; font-weight: 600; }
+    #user-role-display { font-size: 0.9rem; color: #bdc3c7; }
     .sidebar nav { flex-grow: 1; overflow-y: auto; }
     .sidebar nav ul { list-style: none; width: 100%; padding: 15px 0; }
     .sidebar nav li a { display: flex; align-items: center; padding: 15px 30px; color: #ecf0f1; text-decoration: none; transition: all 0.3s ease; font-size: 1rem; border-left: 4px solid transparent; }
-    .sidebar nav li a:hover, .sidebar nav li a.active { background-color: rgba(0, 168, 255, 0.1); border-left-color: var(--accent-color); color: var(--accent-color); }
+    .sidebar nav li a:hover, .sidebar nav li a.active { background-color: rgba(255, 255, 255, 0.05); border-left-color: var(--accent-color); color: #fff; }
     .sidebar nav li a i { margin-right: 15px; width: 20px; text-align: center; }
-    #logout-btn, #student-logout-btn { cursor: pointer; margin-top: auto; }
+    #logout-btn { cursor: pointer; margin-top: auto; }
     .main-content { flex-grow: 1; margin-left: 260px; padding: 40px; transition: margin-left 0.3s ease-in-out; }
     .page { display: none; animation: fadeIn 0.5s ease-out; }
     .page.active { display: block; }
     .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; position: relative; }
-    .page-header h1 { color: var(--primary-color); }
-    .form-wrapper, .table-wrapper, .card { background: var(--card-bg); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; border: 1px solid #4a4a4a; }
+    .form-wrapper, .table-wrapper { background: var(--card-bg); padding: 30px; border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; }
     .table-responsive { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; }
-    th { background-color: #3b4252; color: var(--accent-color); font-weight: 600; }
-    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #4a4a4a; vertical-align: middle; }
-    tr:hover { background-color: rgba(0, 168, 255, 0.05); }
-    .profile-pic { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 2px solid var(--primary-color); }
+    th { background-color: #f8f9fa; font-weight: 600; }
+    th, td { padding: 15px; text-align: left; border-bottom: 1px solid #ecf0f1; vertical-align: middle; }
+    .profile-pic { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; margin-right: 10px; }
     .action-buttons { display: flex; gap: 10px; align-items: center; }
-    .action-btn { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 5px; transition: color 0.3s, transform 0.2s; }
-    .action-btn:hover { transform: scale(1.2); }
+    .action-btn { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 5px; transition: color 0.3s; }
     .edit-btn { color: var(--accent-color); }
     .delete-btn { color: var(--danger-color); }
     .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
     .hamburger-menu { display: none; font-size: 1.8rem; background: none; border: none; color: var(--primary-color); cursor: pointer; position: absolute; right: 30px; top: 35px; z-index: 1001; }
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
-    .modal-content { background-color: var(--card-bg); margin: 5% auto; padding: 25px; border: 1px solid var(--primary-color); width: 90%; max-width: 800px; border-radius: var(--border-radius); animation: fadeIn 0.4s; box-shadow: var(--shadow); }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #4a4a4a; }
-    .modal-header h2 { margin: 0; color: var(--primary-color); }
-    .close-btn { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; transition: color 0.3s; }
-    .close-btn:hover { color: var(--danger-color); }
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+    .modal-content { background-color: #fefefe; margin: 5% auto; padding: 25px; border: 1px solid #888; width: 90%; max-width: 800px; border-radius: var(--border-radius); animation: fadeIn 0.4s; }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+    .modal-header h2 { margin: 0; }
+    .close-btn { color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; }
     .modal-body { padding: 20px 0; max-height: 70vh; overflow-y: auto;}
-    .attendance-row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #4a4a4a; }
+    .attendance-row { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #eee; }
     .attendance-status { display: flex; gap: 10px; }
-    .attendance-status label { cursor: pointer; padding: 5px 12px; border: 1px solid #57606f; border-radius: 20px; transition: all 0.2s; font-size: 0.9rem; }
+    .attendance-status label { cursor: pointer; padding: 5px 12px; border: 1px solid #ccc; border-radius: 20px; transition: all 0.2s; font-size: 0.9rem; }
     .attendance-status input[type="radio"] { display: none; }
     .attendance-status input[type="radio"]:checked + label { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
     .schedule-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .day-column { background: var(--card-bg); padding: 15px; border-radius: var(--border-radius); box-shadow: var(--shadow); border: 1px solid #4a4a4a; }
+    .day-column { background: #fff; padding: 15px; border-radius: var(--border-radius); box-shadow: var(--shadow); }
     .day-column h3 { text-align: center; color: var(--primary-color); border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 15px; }
-    .schedule-card { background: #3b4252; border-radius: 8px; padding: 15px; margin-bottom: 10px; border-left: 5px solid var(--accent-color); position: relative; transition: all 0.3s; }
-    .schedule-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.2); transform: translateY(-2px); }
+    .schedule-card { background: #f9f9f9; border-radius: 8px; padding: 15px; margin-bottom: 10px; border-left: 5px solid var(--accent-color); position: relative; transition: box-shadow 0.3s; }
+    .schedule-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
     .schedule-card p { margin: 3px 0; font-size: 0.95rem; }
     .schedule-actions { position: absolute; top: 5px; right: 5px; display: flex; opacity: 0; transition: opacity 0.3s; }
     .schedule-card:hover .schedule-actions { opacity: 1; }
-    .tabs { display: flex; border-bottom: 2px solid #57606f; margin-bottom: 20px; flex-wrap: wrap; }
+    .tabs { display: flex; border-bottom: 2px solid #ddd; margin-bottom: 20px; flex-wrap: wrap; }
     .tab-link { padding: 10px 20px; cursor: pointer; border: none; background: none; font-size: 1rem; font-weight: 600; color: var(--text-color); border-bottom: 3px solid transparent; transition: all 0.3s; }
     .tab-link.active { border-bottom: 3px solid var(--primary-color); color: var(--primary-color); }
     .tab-content { display: none; }
     .tab-content.active { display: block; animation: fadeIn 0.5s; }
+    .premium-icon { color: var(--premium-color); margin-left: 8px; }
     
-    /* Apply background and shadow to all divs */
-    div {
-        background-color: transparent; /* Default transparent, specific divs will override */
-    }
-
-    .form-wrapper, .table-wrapper, .card, .day-column, .schedule-card, #login-box, .modal-content {
-        background-color: var(--card-bg);
-        box-shadow: var(--shadow);
-    }
-    
-    /* Student Portal Specific */
-    .student-page { font-family: 'Noto Sans Bengali', sans-serif; }
-    .card h2, .card h3 {
-        margin-bottom: 20px; color: var(--primary-color);
-        border-bottom: 2px solid #4a4a4a; padding-bottom: 10px;
-    }
-    .notice-item, .homework-item {
-        padding: 15px; border: 1px solid #4a4a4a; border-radius: 8px; margin-bottom: 15px;
-        border-left: 4px solid var(--accent-color);
-        background-color: #3b4252;
-    }
-     .payment-methods img {
-        width: 80px; margin: 10px; cursor: pointer; transition: transform 0.2s;
-        border-radius: 8px; background-color: #fff; padding: 5px;
-    }
-    .payment-methods img:hover { transform: scale(1.1); box-shadow: 0 0 15px rgba(251, 197, 49, 0.5); }
-
     @media (max-width: 992px) {
         .sidebar { transform: translateX(-260px); }
         .sidebar.active { transform: translateX(0); }
@@ -142,66 +108,28 @@
     }
     @media (max-width: 576px) {
         .main-content { padding: 20px; }
-        .form-wrapper, .table-wrapper, .card { padding: 20px; }
+        .form-wrapper, .table-wrapper { padding: 20px; }
         #login-box { padding: 25px; }
     }
-</style>
-</head>
-<body>
-
-<!-- HTML Body remains the same as your provided code -->
-<!-- =========== LOGIN PAGE =========== -->
-<div id="login-container">
+</style><div id="login-container">
     <div id="login-box">
-        <h2>Welcome to SchoolSphere web</h2>
-        <div class="tabs">
-            <button class="tab-link active" onclick="openLoginTab(event, 'staff-login')">Staff Login</button>
-            <button class="tab-link" onclick="openLoginTab(event, 'student-login')">Student Login</button>
-        </div>
-
-        <!-- Staff Login Form -->
-        <div id="staff-login" class="tab-content active" style="margin-top:20px;">
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="loginRole">Your Role</label>
-                    <select id="loginRole">
-                        <option value="admin">Administrator</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="librarian">Librarian</option>
-                    </select>
-                </div>
-                <div class="input-group"><label for="loginEmail">Email</label><input type="email" id="loginEmail" placeholder="Bypass for Admin"></div>
-                <div class="input-group"><label for="loginPassword">Password</label><input type="password" id="loginPassword" placeholder="Bypass for Admin"></div>
-                <button type="submit" class="btn">Login</button>
-            </form>
-        </div>
-
-        <!-- Student Login Form -->
-        <div id="student-login" class="tab-content" style="margin-top:20px; font-family: 'Noto Sans Bengali', sans-serif;">
-            <form id="studentLoginForm">
-                 <div class="input-group">
-                    <label for="schoolIdInput">School ID</label>
-                    <input type="text" id="schoolIdInput" placeholder="স্কুলের আইডি দিন" required>
-                </div>
-                <div class="input-group">
-                    <label for="studentEmailInput">Email</label>
-                    <input type="email" id="studentEmailInput" placeholder="আপনার ইমেল দিন" required>
-                </div>
-                <div class="input-group">
-                    <label for="studentPasswordInput">Password</label>
-                    <input type="password" id="studentPasswordInput" placeholder="আপনার পাসওয়ার্ড দিন" required>
-                </div>
-                <button type="submit" class="btn">লগইন করুন</button>
-                 <div style="margin-top: 15px; color: var(--secondary-color);">
-                    <p>অথবা আইডি কার্ডের QR কোড স্ক্যান করুন <i class="fas fa-qrcode"></i></p>
-                </div>
-            </form>
-        </div>
+        <h2>Welcome to the SchoolSphere</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="loginRole">Your Role</label>
+                <select id="loginRole" required>
+                    <option value="admin">Administrator</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="librarian">Librarian</option>
+                </select>
+            </div>
+            <div class="input-group"><label for="loginEmail">Email</label><input type="email" id="loginEmail" required></div>
+            <div class="input-group"><label for="loginPassword">Password</label><input type="password" id="loginPassword" required></div>
+            <button type="submit" class="btn">Login</button>
+        </form>
     </div>
 </div>
 
-
-<!-- =========== STAFF APP WRAPPER =========== -->
 <div id="app-wrapper">
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -234,50 +162,8 @@
         <section id="student-profile" class="page"></section>
         <section id="library-management" class="page"></section>
         <section id="admission-management" class="page"></section>
-        <section id="homework-management" class="page"></section>
-        <section id="notice-management" class="page"></section>
-        <section id="billing-management" class="page"></section>
     </main>
 </div>
-
-<!-- =========== STUDENT APP WRAPPER =========== -->
-<div id="student-app-wrapper">
-    <aside class="sidebar" id="student-sidebar">
-        <div class="sidebar-header">
-            <img id="student-profile-pic-sidebar" src="https://i.ibb.co/6yT1WfX/school-logo-placeholder.png" alt="Student Pic">
-            <h2 id="student-name-sidebar">শিক্ষার্থীর নাম</h2>
-            <span id="student-class-sidebar">ক্লাস ও রোল</span>
-        </div>
-        <nav>
-            <ul id="student-nav-list">
-                <li><a href="#student-dashboard" class="student-nav-link active"><i class="fas fa-tachometer-alt"></i> ড্যাশবোর্ড</a></li>
-                <li><a href="#student-homework" class="student-nav-link"><i class="fas fa-book-open"></i> ডায়েরি/বাড়ির কাজ</a></li>
-                <li><a href="#student-schedules-view" class="student-nav-link"><i class="fas fa-calendar-alt"></i> ক্লাস রুটিন</a></li>
-                <li><a href="#student-attendance-view" class="student-nav-link"><i class="fas fa-user-check"></i> হাজিরা</a></li>
-                <li><a href="#student-results" class="student-nav-link"><i class="fas fa-poll"></i> পরীক্ষার ফলাফল</a></li>
-                <li><a href="#student-billing" class="student-nav-link"><i class="fas fa-money-bill-wave"></i> বিল পরিশোধ</a></li>
-                <li><a href="#student-notices" class="student-nav-link"><i class="fas fa-bell"></i> নোটিশ বোর্ড</a></li>
-            </ul>
-        </nav>
-        <a id="student-logout-btn" class="nav-link" style="padding: 15px 30px;"><i class="fas fa-sign-out-alt"></i> লগআউট</a>
-    </aside>
-
-    <main class="main-content">
-        <header class="page-header">
-            <h1 id="student-page-title">ড্যাশবোর্ড</h1>
-            <button class="hamburger-menu" id="student-hamburger-menu"><i class="fas fa-bars"></i></button>
-        </header>
-
-        <section id="student-dashboard" class="page student-page active"></section>
-        <section id="student-homework" class="page student-page"></section>
-        <section id="student-schedules-view" class="page student-page"></section>
-        <section id="student-attendance-view" class="page student-page"></section>
-        <section id="student-results" class="page student-page"></section>
-        <section id="student-billing" class="page student-page"></section>
-        <section id="student-notices" class="page student-page"></section>
-    </main>
-</div>
-
 
 <div id="editModal" class="modal">
     <div class="modal-content">
@@ -288,6 +174,8 @@
         <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
+
+<!-- Hidden container for PDF generation -->
 <div id="pdf-container" style="position: absolute; left: -9999px; width: 800px; padding: 20px; background: white; color: black;"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -295,8 +183,8 @@
 <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
 
 <script>
-    // Firebase Config
-   const firebaseConfig = {
+    // IMPORTANT: Add your Firebase configuration here
+     const firebaseConfig = {
       apiKey: "AIzaSyBJ9PlepLP2Z1johsEwK2Y784jOOnXxKU0",
       authDomain: "nfzpro.firebaseapp.com",
       projectId: "nfzpro",
@@ -309,142 +197,131 @@
     firebase.initializeApp(firebaseConfig);
     const secondaryApp = firebase.initializeApp(firebaseConfig, "secondary");
     const secondaryAuth = secondaryApp.auth();
+
     const db = firebase.database();
     const mainAuth = firebase.auth();
     
-    let appState = { user: null, schoolId: null, settings: {}, students: {}, classes: {}, sections: {}, teachers: {}, librarians: {}, schedules: {}, attendance: {}, exams: {}, marks: {}, mainExams: {}, rooms: {}, invigilatorRosters: {}, library: {}, admissionApplications: {}, admissionSettings: {}, homework: {}, notices: {}, bills: {} };
+    let appState = { user: null, schoolId: null, settings: {}, students: {}, classes: {}, sections: {}, teachers: {}, librarians: {}, schedules: {}, leaves: {}, attendance: {}, exams: {}, marks: {}, mainExams: {}, rooms: {}, seatPlans: {}, invigilatorRosters: {}, library: {}, admissionApplications: {}, admissionSettings: {} };
     let attendanceChart = null; 
 
-    // Login and Core App Logic
     document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('loginForm').addEventListener('submit', handleStaffLogin);
-        document.getElementById('studentLoginForm').addEventListener('submit', handleStudentLogin);
-        attachEventListeners();
-        attachStudentEventListeners();
-    });
+        const loginForm = document.getElementById('loginForm');
+        if (!loginForm) return;
 
-    // ============================================
-    // MODIFIED LOGIN FUNCTION FOR YOUR ID
-    // ============================================
-    function handleStaffLogin(e) {
-        e.preventDefault();
-        const loginButton = e.target.querySelector('button[type="submit"]');
-        loginButton.disabled = true; 
-        loginButton.textContent = 'অ্যাডমিন প্যানেলে প্রবেশ করা হচ্ছে...';
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const role = document.getElementById('loginRole').value;
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginButton = e.target.querySelector('button[type="submit"]');
+            loginButton.disabled = true; loginButton.textContent = 'Processing...';
 
-        // Your specific ID for Admin Access
-        const mySuperAdminID = "QarUDdnVNDbHiPJaWyeloeitbWB3";
-        // Default school ID for this demo
-        const targetSchoolId = "school_default_01"; 
+            let schoolId = null; 
 
-        // Granting Admin Access Object
-        appState.user = { 
-            uid: mySuperAdminID, 
-            email: "admin@schoolsphere.com", 
-            role: "admin", 
-            name: "Super Administrator" 
-        };
-
-        // Attempting to set permissions in database (so you can write data)
-        const updates = {};
-        updates[`schools/${targetSchoolId}/roles/admins/${mySuperAdminID}`] = true;
-        updates[`user_school_map/${mySuperAdminID}`] = targetSchoolId;
-        
-        // Initialize default settings if needed
-        updates[`schools/${targetSchoolId}/settings/schoolName`] = "SchoolSphere High School";
-
-        // Update DB then Login, or Login anyway if permission fails
-        db.ref().update(updates).then(() => {
-            console.log("Admin Access Granted for ID: " + mySuperAdminID);
-            initializeApp(targetSchoolId);
-        }).catch(error => {
-            console.error("Database update failed (check rules), logging in locally:", error);
-            initializeApp(targetSchoolId);
-        }).finally(() => {
-            loginButton.disabled = false; 
-            loginButton.textContent = 'Login';
-        });
-    }
-
-    function handleStudentLogin(e) {
-        e.preventDefault();
-        const schoolId = document.getElementById('schoolIdInput').value.trim();
-        const email = document.getElementById('studentEmailInput').value.trim();
-        const password = document.getElementById('studentPasswordInput').value;
-        const loginButton = e.target.querySelector('button[type="submit"]');
-        loginButton.disabled = true; loginButton.textContent = 'প্রসেসিং...';
-
-        if (!schoolId || !email || !password) {
-            alert("Please fill all fields.");
-            loginButton.disabled = false; loginButton.textContent = 'লগইন করুন';
-            return;
-        }
-
-        db.ref(`schools/${schoolId}/students`).orderByChild('email').equalTo(email).once('value')
-            .then(snapshot => {
-                if (!snapshot.exists()) {
-                    return Promise.reject(new Error("এই ইমেল দিয়ে কোনো ছাত্র খুঁজে পাওয়া যায়নি।"));
-                }
-                let studentData = null;
-                let studentKey = null;
-                snapshot.forEach(childSnapshot => {
-                    const student = childSnapshot.val();
-                    if (student.password === password) {
-                        studentData = student;
-                        studentKey = childSnapshot.key;
+            mainAuth.signInWithEmailAndPassword(email, password)
+                .then(userCredential => {
+                    const user = userCredential.user;
+                    return db.ref('user_school_map/' + user.uid).once('value');
+                })
+                .then(snapshot => {
+                    if (!snapshot.exists()) return Promise.reject(new Error("Your account is not associated with any school."));
+                    schoolId = snapshot.val();
+                    const rolePlural = role + 's';
+                    return db.ref(`schools/${schoolId}/roles/${rolePlural}/${mainAuth.currentUser.uid}`).once('value');
+                })
+                .then(roleSnapshot => {
+                    if (roleSnapshot.exists()) {
+                        const user = mainAuth.currentUser;
+                        const baseUser = { uid: user.uid, email: user.email, role: role };
+                        
+                        if (role === 'teacher' || role === 'librarian') {
+                            const rolePath = role === 'teacher' ? 'teachers' : 'librarians';
+                            return db.ref(`schools/${schoolId}/${rolePath}/${user.uid}`).once('value').then(userData => {
+                                 appState.user = { ...baseUser, ...userData.val() };
+                                 initializeApp(schoolId);
+                            });
+                        } else { 
+                            appState.user = { ...baseUser, name: 'Administrator' };
+                            initializeApp(schoolId);
+                        }
+                    } else {
+                         let roleName = 'Administrator';
+                         if(role === 'teacher') roleName = 'Teacher';
+                         if(role === 'librarian') roleName = 'Librarian';
+                        return Promise.reject(new Error(`You are not registered as a '${roleName}' for this school.`));
                     }
+                })
+                .catch(error => {
+                    alert("Login Failed: " + error.message);
+                    mainAuth.signOut();
+                })
+                .finally(() => {
+                    loginButton.disabled = false; loginButton.textContent = 'Login';
                 });
+        });
 
-                if (studentData) {
-                    studentData.id = studentKey;
-                    appState.user = { role: 'student', ...studentData };
-                    initializeStudentApp(schoolId);
-                } else {
-                    return Promise.reject(new Error("পাসওয়ার্ড সঠিক নয়।"));
-                }
-            })
-            .catch(error => {
-                alert("লগইন ব্যর্থ: " + error.message);
-            })
-            .finally(() => {
-                loginButton.disabled = false; loginButton.textContent = 'লগইন করুন';
-            });
-    }
+        attachEventListeners();
+    });
 
     function initializeApp(schoolId) {
         appState.schoolId = schoolId; 
         document.getElementById('login-container').style.display = 'none';
         document.getElementById('app-wrapper').style.display = 'flex';
         document.getElementById('user-role-display').textContent = appState.user.name;
-        fetchAllData(setupUI);
+        fetchAllData();
     }
     
-    function initializeStudentApp(schoolId) {
-        appState.schoolId = schoolId;
-        document.getElementById('login-container').style.display = 'none';
-        document.getElementById('student-app-wrapper').style.display = 'flex';
+    function setupUI() {
+        const userRole = appState.user.role;
+        const navList = document.getElementById('nav-list');
         
-        const student = appState.user;
-        document.getElementById('student-profile-pic-sidebar').src = student.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png';
-        document.getElementById('student-name-sidebar').textContent = student.name;
-        document.getElementById('student-class-sidebar').textContent = `${student.className} (রোল: ${student.roll})`;
+        const allNavs = {
+            'admin-dashboard': `<li><a href="#admin-dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>`,
+            'teacher-dashboard': `<li><a href="#teacher-dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>`,
+            'admission-management': `<li><a href="#admission-management" class="nav-link"><i class="fas fa-file-alt"></i> Admission Management</a></li>`,
+            'add-student': `<li><a href="#add-student" class="nav-link"><i class="fas fa-user-plus"></i> Add Student</a></li>`,
+            'student-list': `<li><a href="#student-list" class="nav-link"><i class="fas fa-users"></i> Student List</a></li>`,
+            'teachers': `<li><a href="#teachers" class="nav-link"><i class="fas fa-chalkboard-user"></i> Staff Management</a></li>`,
+            'schedules': `<li><a href="#schedules" class="nav-link"><i class="fas fa-calendar-alt"></i> Class Schedules</a></li>`,
+            'student-attendance': `<li><a href="#student-attendance" class="nav-link"><i class="fas fa-user-check"></i> Student Attendance</a></li>`,
+            'class-tests': `<li><a href="#class-tests" class="nav-link"><i class="fas fa-file-signature"></i> Class Tests & Scores</a></li>`,
+            'exam-management': `<li><a href="#exam-management" class="nav-link"><i class="fas fa-sitemap"></i> Exam Management</a></li>`,
+            'library-management': `<li><a href="#library-management" class="nav-link"><i class="fas fa-book-open-reader"></i> Library Management</a></li>`,
+            'settings': `<li><a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Settings</a></li>`,
+        };
+        const adminNav = ['admin-dashboard', 'admission-management', 'add-student', 'student-list', 'teachers', 'schedules', 'exam-management', 'library-management', 'settings'];
+        const teacherNav = ['teacher-dashboard', 'student-list', 'student-attendance', 'class-tests', 'schedules'];
+        const librarianNav = ['library-management'];
 
-        fetchAllData(() => navigateToStudentPage('student-dashboard'));
+        let navsToRender;
+        if(userRole === 'admin') navsToRender = adminNav;
+        else if (userRole === 'teacher') navsToRender = teacherNav;
+        else if (userRole === 'librarian') navsToRender = librarianNav;
+        
+        navList.innerHTML = navsToRender.map(key => allNavs[key]).join('');
+
+        const firstLink = document.querySelector('.nav-link');
+        if (firstLink) {
+            const initialPage = window.location.hash.substring(1) || firstLink.getAttribute('href').substring(1);
+            navigateTo(initialPage);
+        }
     }
-
-    function fetchAllData(callback) {
+    
+    function fetchAllData() {
         const schoolId = appState.schoolId;
         if (!schoolId) return;
         
         db.ref(`schools/${schoolId}`).on('value', snapshot => {
             const schoolData = snapshot.val() || {};
-            const currentUser = appState.user;
-            appState = { user: currentUser, schoolId, ...schoolData };
+            const defaultState = { user: appState.user, schoolId: appState.schoolId };
+            appState = { ...defaultState, ...schoolData };
 
-            if (currentUser.role !== 'student') {
-                renderSchoolInfo();
-            }
-            if (callback) callback();
+            setupUI();
+            renderSchoolInfo();
+            const hash = window.location.hash.substring(1) || (appState.user.role === 'admin' ? 'admin-dashboard' : appState.user.role === 'teacher' ? 'teacher-dashboard' : 'library-management');
+            const [pageId, paramString] = hash.split('?');
+            const params = paramString ? Object.fromEntries(new URLSearchParams(paramString)) : null;
+            renderPageContent(pageId, params);
         });
     }
 
@@ -456,46 +333,131 @@
         logoEl.onerror = () => { logoEl.src = 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'; };
     }
     
-    // UI, Navigation, and Page Rendering Logic
-    function setupUI() {
-        const userRole = appState.user.role;
-        const navList = document.getElementById('nav-list');
-        
-        const allNavs = {
-            'admin-dashboard': `<li><a href="#admin-dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>`,
-            'teacher-dashboard': `<li><a href="#teacher-dashboard" class="nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>`,
-            'admission-management': `<li><a href="#admission-management" class="nav-link"><i class="fas fa-file-alt"></i> Admission</a></li>`,
-            'add-student': `<li><a href="#add-student" class="nav-link"><i class="fas fa-user-plus"></i> Add Student</a></li>`,
-            'student-list': `<li><a href="#student-list" class="nav-link"><i class="fas fa-users"></i> Student List</a></li>`,
-            'teachers': `<li><a href="#teachers" class="nav-link"><i class="fas fa-chalkboard-user"></i> Staff Management</a></li>`,
-            'schedules': `<li><a href="#schedules" class="nav-link"><i class="fas fa-calendar-alt"></i> Class Schedules</a></li>`,
-            'student-attendance': `<li><a href="#student-attendance" class="nav-link"><i class="fas fa-user-check"></i> Attendance</a></li>`,
-            'homework-management': `<li><a href="#homework-management" class="nav-link"><i class="fas fa-book-open"></i> Diary/Homework</a></li>`,
-            'class-tests': `<li><a href="#class-tests" class="nav-link"><i class="fas fa-file-signature"></i> Class Tests</a></li>`,
-            'exam-management': `<li><a href="#exam-management" class="nav-link"><i class="fas fa-sitemap"></i> Exam Management</a></li>`,
-            'library-management': `<li><a href="#library-management" class="nav-link"><i class="fas fa-book-open-reader"></i> Library</a></li>`,
-            'notice-management': `<li><a href="#notice-management" class="nav-link"><i class="fas fa-bell"></i> Notices</a></li>`,
-            'billing-management': `<li><a href="#billing-management" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Billing</a></li>`,
-            'settings': `<li><a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Settings</a></li>`,
-            'main': `<li><a href="#settings" class="nav-link"><i class="fas fa-cogs"></i> Settings</a></li>`,
+    function handleFormSubmits(e) {
+        e.preventDefault();
+        const form = e.target;
+        const button = form.querySelector('button[type="submit"]');
+        button.disabled = true; button.textContent = 'Processing...';
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        const schoolId = appState.schoolId;
 
+        const actions = {
+            'addStudentForm': () => db.ref(`schools/${schoolId}/students`).push(data).then(() => { alert('Student added successfully!'); form.reset(); navigateTo('student-list'); }),
+            'addStaffForm': () => {
+                return secondaryAuth.createUserWithEmailAndPassword(data.email, data.password).then(cred => {
+                    const staffUid = cred.user.uid;
+                    const staffRole = data.role;
+                    const rolePlural = staffRole + 's';
+                    const staffData = {name: data.name, phone: data.phone, email: data.email, profilePicUrl: data.profilePicUrl};
+                    if (staffRole === 'teacher') staffData.subject = data.subject;
+
+                    const updates = {};
+                    updates[`schools/${schoolId}/${rolePlural}/${staffUid}`] = staffData;
+                    updates[`schools/${schoolId}/roles/${rolePlural}/${staffUid}`] = true;
+                    updates[`user_school_map/${staffUid}`] = schoolId;
+                    return db.ref().update(updates);
+                }).then(() => { alert('Staff added successfully!'); form.reset(); secondaryAuth.signOut(); });
+            },
+            'addScheduleForm': () => db.ref(`schools/${schoolId}/schedules`).push(data).then(() => { alert('Schedule added successfully!'); form.reset(); }),
+            'addClassForm': () => db.ref(`schools/${schoolId}/classes`).push({ name: document.getElementById('newClassName').value.trim() }).then(() => form.reset()),
+            'addSectionForm': () => db.ref(`schools/${schoolId}/sections`).push({ name: document.getElementById('newSectionName').value.trim() }).then(() => form.reset()),
+            'addAdmissionClassForm': () => db.ref(`schools/${schoolId}/admissionSettings/formClasses`).push({ name: document.getElementById('newAdmissionClassName').value.trim() }).then(() => form.reset()),
+            'schoolSettingsForm': () => {
+                const updates = {
+                    'settings/schoolName': data.schoolName, 'settings/schoolLogoUrl': data.schoolLogoUrl,
+                    'settings/principalName': data.principalName, 'settings/principalSignatureUrl': data.principalSignatureUrl
+                };
+                return db.ref(`schools/${schoolId}`).update(updates).then(() => alert('Settings saved successfully!'));
+            },
+            'editForm': () => {
+                const path = form.dataset.type === 'admissionApplication' ? 
+                             `admissionApplications/${form.dataset.id}` : 
+                             `${form.dataset.type}s/${form.dataset.id}`;
+                return db.ref(`schools/${schoolId}/${path}`).update(data).then(() => { 
+                    alert('Information updated!'); 
+                    closeModal(); 
+                });
+            },
+            'addExamForm': () => { data.createdBy = appState.user.uid; return db.ref(`schools/${schoolId}/exams`).push(data).then(() => { alert('Class test created successfully!'); form.reset(); }); },
+            'attendanceForm': () => {
+                const date = document.getElementById('attendanceDate').value;
+                const classSection = document.getElementById('attendanceClassSelector').value;
+                const updates = {};
+                for(const [key, value] of formData.entries()){
+                    const studentId = key.replace('status_', '');
+                    updates[`/schools/${schoolId}/attendance/${date}/${classSection}/${studentId}`] = { status: value };
+                }
+                return db.ref().update(updates).then(() => alert('Attendance saved!'));
+            },
+            'markEntryForm': () => {
+                const examId = form.dataset.examId;
+                const updates = {};
+                for(const [key, value] of formData.entries()){
+                     if (value.trim() !== '') updates[`/schools/${schoolId}/marks/${examId}/${key}`] = { marksObtained: parseFloat(value) };
+                }
+                return db.ref().update(updates).then(() => { alert('Marks saved successfully!'); closeModal(); });
+            },
+            'addMainExamForm': () => db.ref(`schools/${schoolId}/mainExams`).push(data).then(() => { alert('Main exam added successfully!'); form.reset(); }),
+            'addRoomForm': () => db.ref(`schools/${schoolId}/rooms`).push(data).then(() => { alert('Room added successfully!'); form.reset(); }),
+            'examRoutineForm': () => {
+                const examId = form.dataset.examId;
+                const updates = {};
+                for (const [key, value] of formData.entries()) {
+                    if (value) {
+                        updates[`/schools/${appState.schoolId}/mainExams/${examId}/routine/${key}`] = value;
+                    }
+                }
+                return db.ref().update(updates).then(() => { alert('Routine saved!'); closeModal(); });
+            },
+            'addBookForm': () => { 
+                data.availableQuantity = parseInt(data.totalQuantity);
+                return db.ref(`schools/${schoolId}/library/books`).push(data).then(() => { alert('Book added successfully!'); form.reset(); }); 
+            },
+            'issueBookForm': () => {
+                const bookId = data.bookId;
+                const studentId = data.studentId;
+                const book = appState.library.books[bookId];
+
+                if (!book || book.availableQuantity < 1) {
+                    return Promise.reject(new Error("This book is currently unavailable."));
+                }
+                
+                const issueData = {
+                    bookId: bookId,
+                    studentId: studentId,
+                    issueDate: new Date().toISOString().slice(0, 10),
+                    dueDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10),
+                    returnDate: null,
+                    status: 'issued'
+                };
+                const updates = {};
+                updates[`schools/${schoolId}/library/books/${bookId}/availableQuantity`] = book.availableQuantity - 1;
+                updates[`schools/${schoolId}/library/issuedBooks/${db.ref().push().key}`] = issueData;
+
+                return db.ref().update(updates).then(() => { alert('Book issued successfully!'); form.reset(); });
+            }
         };
-        const adminNav = ['admin-dashboard', 'admission-management', 'add-student', 'student-list', 'teachers', 'schedules', 'student-attendance', 'homework-management', 'exam-management', 'library-management', 'notice-management', 'billing-management', 'settings'];
-        const teacherNav = ['teacher-dashboard', 'student-list', 'student-attendance', 'homework-management', 'class-tests', 'schedules'];
-        const librarianNav = ['library-management'];
-
-        let navsToRender = userRole === 'admin' ? adminNav : userRole === 'teacher' ? teacherNav : librarianNav;
-        navList.innerHTML = navsToRender.map(key => allNavs[key]).join('');
-
-        const firstLink = document.querySelector('.nav-link');
-        if (firstLink) {
-            const initialPage = window.location.hash.substring(1) || firstLink.getAttribute('href').substring(1);
-            navigateTo(initialPage);
+        const action = actions[form.id];
+        if (action) {
+            action().catch(err => alert("Error: " + err.message))
+                  .finally(() => { 
+                      button.disabled = false; 
+                      const originalText = form.id.includes('add') ? 'Add' : 'Save';
+                      button.textContent = originalText;
+                  });
+        } else { button.disabled = false; }
+    }
+    
+    function deleteItem(id, path) { if (confirm('Are you sure you want to delete this item?')) { db.ref(`schools/${appState.schoolId}/${path}/${id}`).remove().catch(err => alert(err.message)); } }
+    function deleteStaff(uid, role) {
+        if (confirm(`Are you sure you want to delete this ${role}? This action is irreversible and will disable their login.`)) {
+             alert("This action is restricted. Please contact the super administrator. (Demo limitation)");
         }
     }
     
     function navigateTo(pageId, params = null) {
-        document.querySelectorAll('#app-wrapper .page').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         const targetPage = document.getElementById(pageId);
         if(targetPage) {
             targetPage.classList.add('active');
@@ -515,7 +477,6 @@
         renderPageContent(pageId, params);
         document.getElementById('sidebar').classList.remove('active');
     }
-
     window.onpopstate = () => {
         const defaultPage = appState.user.role === 'admin' ? 'admin-dashboard' : appState.user.role === 'teacher' ? 'teacher-dashboard' : 'library-management';
         const hash = window.location.hash.substring(1) || defaultPage;
@@ -523,747 +484,766 @@
         const params = paramString ? Object.fromEntries(new URLSearchParams(paramString)) : null;
         navigateTo(pageId, params);
     };
-
-    function navigateToStudentPage(pageId) {
-        document.querySelectorAll('.student-page').forEach(p => p.classList.remove('active'));
-        document.getElementById(pageId).classList.add('active');
-        document.querySelectorAll('.student-nav-link').forEach(link => link.classList.remove('active'));
-        const activeLink = document.querySelector(`.student-nav-link[href="#${pageId}"]`);
-        activeLink.classList.add('active');
-        document.getElementById('student-page-title').textContent = activeLink.textContent.trim();
-        renderStudentPageContent(pageId);
-        document.getElementById('student-sidebar').classList.remove('active');
-    }
-
+    
     function renderPageContent(pageId, params = null) {
         const pageElement = document.getElementById(pageId); if (!pageElement) return;
-        const pageRenderers = {'admin-dashboard': getAdminDashboardHTML, 'teacher-dashboard': getTeacherDashboardHTML, 'add-student': getAddStudentHTML, 'student-list': getStudentListHTML, 'teachers': getTeachersHTML, 'schedules': getSchedulesHTML, 'settings': getSettingsHTML, 'student-attendance': getAttendanceHTML, 'class-tests': getClassTestsHTML, 'student-profile': getStudentProfileHTML, 'exam-management': getExamManagementHTML, 'library-management': getLibraryManagementHTML, 'admission-management': getAdmissionManagementHTML, 'homework-management': getHomeworkManagementHTML, 'notice-management': getNoticeManagementHTML, 'billing-management': getBillingManagementHTML};
+        const pageRenderers = {'admin-dashboard': getAdminDashboardHTML, 'teacher-dashboard': getTeacherDashboardHTML, 'add-student': getAddStudentHTML, 'student-list': getStudentListHTML, 'teachers': getTeachersHTML, 'schedules': getSchedulesHTML, 'settings': getSettingsHTML, 'student-attendance': getAttendanceHTML, 'class-tests': getClassTestsHTML, 'student-profile': getStudentProfileHTML, 'exam-management': getExamManagementHTML, 'library-management': getLibraryManagementHTML, 'admission-management': getAdmissionManagementHTML};
         if(pageRenderers[pageId]) pageElement.innerHTML = pageRenderers[pageId](params);
-        
-        const pagePopulators = {'admin-dashboard': populateAdminDashboard, 'teacher-dashboard': populateTeacherDashboard, 'student-list': populateStudentTable, 'add-student': populateAllDropdowns, 'teachers': populateTeachersTable, 'schedules': () => { populateAllDropdowns(); populateScheduleGrid(); }, 'settings': populateSettingsPage, 'student-attendance': populateAttendancePage, 'class-tests': populateClassTestsPage, 'student-profile': populateStudentProfilePage, 'exam-management': populateExamManagementPage, 'library-management': populateLibraryManagementPage, 'admission-management': populateAdmissionManagementPage, 'homework-management': populateHomeworkManagementPage, 'notice-management': populateNoticeManagementPage, 'billing-management': populateBillingManagementPage};
+        const pagePopulators = {'admin-dashboard': populateAdminDashboard, 'teacher-dashboard': populateTeacherDashboard, 'student-list': populateStudentTable, 'add-student': populateAllDropdowns, 'teachers': populateTeachersTable, 'schedules': () => { populateAllDropdowns(); populateScheduleGrid(); }, 'settings': populateSettingsPage, 'student-attendance': populateAttendancePage, 'class-tests': populateClassTestsPage, 'student-profile': populateStudentProfilePage, 'exam-management': populateExamManagementPage, 'library-management': populateLibraryManagementPage, 'admission-management': populateAdmissionManagementPage};
         if(pagePopulators[pageId]) pagePopulators[pageId](params);
     }
     
-    function renderStudentPageContent(pageId) {
-        const pageElement = document.getElementById(pageId); if (!pageElement) return;
-        const renderers = {'student-dashboard': getStudentDashboardHTML, 'student-homework': getStudentHomeworkHTML, 'student-schedules-view': getStudentSchedulesHTML, 'student-attendance-view': getStudentAttendanceHTML, 'student-results': getStudentResultsHTML, 'student-billing': getStudentBillingHTML, 'student-notices': getStudentNoticesHTML};
-        if (renderers[pageId]) pageElement.innerHTML = renderers[pageId]();
-        const populators = {'student-dashboard': populateStudentDashboard, 'student-homework': populateStudentHomework, 'student-schedules-view': populateStudentSchedule, 'student-attendance-view': populateStudentAttendance, 'student-results': populateStudentResults, 'student-billing': populateStudentBilling, 'student-notices': populateStudentNotices};
-        if (populators[pageId]) populators[pageId]();
-    }
+    // HTML Generator Functions
+    function getAdminDashboardHTML() { return `<div class="grid-container"> <div class="form-wrapper"><h3><i class="fas fa-users"></i> Total Students</h3><h2 id="total-students">0</h2></div> <div class="form-wrapper"><h3><i class="fas fa-chalkboard-user"></i> Total Staff</h3><h2 id="total-teachers">0</h2></div> <div class="form-wrapper"><h3><i class="fas fa-layer-group"></i> Total Classes</h3><h2 id="total-classes">0</h2></div> <div class="form-wrapper"><h3><i class="fas fa-book"></i> Books in Library</h3><h2 id="total-books">0</h2></div></div> <div class="form-wrapper" style="height: 400px;"> <h2>Today's Attendance Rate by Class</h2> <canvas id="attendanceChart"></canvas> </div>`; }
+    function getSchedulesHTML() { const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]; const adminForm = appState.user.role === 'admin' ? `<div class="form-wrapper"> <h2>Create New Class Schedule</h2> <form id="addScheduleForm"> <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"> <div class="input-group"><label>Day</label><select name="day" required>${days.map((day, i) => `<option value="${i}">${day}</option>`).join('')}</select></div> <div class="input-group"><label>Class</label><select name="className" id="scheduleClass" required></select></div> <div class="input-group"><label>Section</label><select name="section" id="scheduleSection" required></select></div> <div class="input-group"><label>Subject</label><input name="subject" required></div> <div class="input-group"><label>Teacher</label><select name="teacherId" id="scheduleTeacher" required></select></div> <div class="input-group"><label>Start Time</label><input type="time" name="startTime" required></div> <div class="input-group"><label>End Time</label><input type="time" name="endTime" required></div> </div> <button type="submit" class="btn">Add Schedule</button> </form> </div>` : ''; return `${adminForm} <div> <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;"> <h2 style="color: var(--text-color);">Weekly Class Routine</h2> <div style="display:flex; gap: 10px; align-items: center;"> <select id="routineFilter" onchange="populateScheduleGrid()" style="padding: 10px; border-radius: 8px; border: 1px solid #ccc;"><option value="all">All Classes</option></select> <button class="btn" onclick="generateWordStyleRoutinePdf()" style="width:auto; margin-top:0; background-color: var(--accent-color);"><i class="fas fa-file-pdf"></i> Download PDF</button></div> </div> <div id="schedule-display" class="schedule-grid"> ${days.map((day, i) => `<div class="day-column"><h3>${day}</h3><div id="day-${i}"></div></div>`).join('')} </div> </div>`; }
+    function getAttendanceHTML() { return ` <div class="form-wrapper"> <h2>Take Student Attendance</h2> <div class="grid-container" style="grid-template-columns: 1fr 1fr auto; align-items:flex-end;"> <div class="input-group"> <label>Class & Section</label> <select id="attendanceClassSelector"></select> </div> <div class="input-group"> <label>Date</label> <input type="date" id="attendanceDate" value="${new Date().toISOString().slice(0,10)}"> </div> <div id="attendance-actions" style="margin-bottom: 15px; display:none;"><button class="btn" style="width:auto; background-color: var(--success-color);" onclick="generateAttendanceReportPdf()"><i class="fas fa-file-pdf"></i> Monthly Report</button></div> </div> </div> <div class="table-wrapper"> <form id="attendanceForm"> <div id="attendanceStudentList"> <p>Please select a class and date to view students.</p> </div> <button type="submit" class="btn" id="saveAttendanceBtn" style="display:none;">Save Attendance</button> </form> </div>`; }
+    function getClassTestsHTML() { return ` <div class="form-wrapper"> <h2>Create New Class Test</h2> <form id="addExamForm"> <div class="grid-container"> <div class="input-group"><label>Test Name</label><input type="text" name="examName" required></div> <div class="input-group"><label>Class</label><select name="className" id="examClass" required></select></div> <div class="input-group"><label>Section</label><select name="section" id="examSection" required></select></div> <div class="input-group"><label>Subject</label><input type="text" name="subject" required></div> <div class="input-group"><label>Total Marks</label><input type="number" name="totalMarks" required></div> </div> <button type="submit" class="btn">Create Test</button> </form> </div> <div class="table-wrapper"> <h2>My Created Tests</h2> <table id="examsTable"> <thead><tr><th>Name</th><th>Class</th><th>Subject</th><th>Total Marks</th><th>Action</th></tr></thead> <tbody></tbody> </table> </div>`; }
+    function getExamManagementHTML() { return ` <div class="tabs"> <button class="tab-link active" onclick="openTab(event, 'main-exam')">Main Exams & Routine</button> <button class="tab-link" onclick="openTab(event, 'room-management')">Room Management</button> <button class="tab-link" onclick="openTab(event, 'seat-plan')">Seat Plan</button> <button class="tab-link" onclick="openTab(event, 'invigilator-duty')">Invigilator Duty</button> </div> <div id="main-exam" class="tab-content active"> <div class="form-wrapper"> <h2>Create New Main Exam</h2> <form id="addMainExamForm"> <div class="grid-container"> <div class="input-group"><label>Exam Name (e.g., Half-Yearly Exam 2025)</label><input type="text" name="name" required></div> <div class="input-group"><label>Exam Start Date</label><input type="date" name="date" required></div> </div> <button type="submit" class="btn">Create Exam</button> </form> </div> <div class="table-wrapper"> <h2>List of Main Exams</h2> <div id="mainExamsList" class="table-responsive"></div> </div> </div> <div id="room-management" class="tab-content"> <div class="form-wrapper"> <h2>Add New Room</h2> <form id="addRoomForm" class="grid-container" style="grid-template-columns: 2fr 1fr auto; align-items: end;"> <div class="input-group"><label>Room Name/Number</label><input type="text" name="name" required></div> <div class="input-group"><label>Capacity</label><input type="number" name="capacity" required></div> <button type="submit" class="btn" style="width:auto; height: 48px; margin-bottom: 15px;">Add</button> </form> </div> <div class="table-wrapper"><h2>Room List</h2><div id="roomsList" class="table-responsive"></div></div> </div> <div id="seat-plan" class="tab-content"> <div class="form-wrapper"> <h2>Generate Seat Plan</h2> <div class="grid-container"> <div class="input-group"><label>Select Exam</label><select id="seatPlanExamSelect" onchange="generateSeatPlan()"></select></div> <div class="input-group"><label>Select Class</label><select id="seatPlanClassSelect" onchange="generateSeatPlan()"></select></div> </div> <div class="input-group"><label>Select Rooms (Hold Ctrl/Cmd to select multiple)</label><select id="seatPlanRoomSelect" multiple style="height: 150px;" onchange="generateSeatPlan()"></select></div> </div> <div class="table-wrapper"> <div style="display:flex; justify-content:space-between; align-items:center;"> <h2>Generated Seat Plan</h2> <button class="btn" onclick="generatePdf('#seatPlanDisplay', 'Seat-Plan')" id="downloadSeatPlanBtn" style="width:auto; background-color: var(--success-color);"><i class="fas fa-file-pdf"></i> Download PDF</button> </div> <div id="seatPlanDisplay" style="margin-top:20px;">Please fill the form above to generate a plan.</div> </div> </div> <div id="invigilator-duty" class="tab-content"> <div class="form-wrapper"> <h2>Create Invigilator Duty Roster</h2> <div class="grid-container"> <div class="input-group"><label>Select Exam</label><select id="rosterExamSelect" onchange="renderRosterUI()"></select></div> <div class="input-group"><label>Date</label><input type="date" id="rosterDate" required onchange="renderRosterUI()"></div> </div> <div id="rosterRoomTeacherSelection"></div> <button class="btn" onclick="saveInvigilatorRoster()">Save Roster</button> </div> <div class="table-wrapper"> <div style="display:flex; justify-content:space-between; align-items:center;"> <h2>Duty Roster</h2> <button class="btn" onclick="generatePdf('#rosterDisplay', 'Duty-Roster')" id="downloadRosterBtn" style="width:auto; background-color: var(--success-color);"><i class="fas fa-file-pdf"></i> Download PDF</button> </div> <div id="rosterDisplay" style="margin-top:20px;">Please select an exam and date.</div> </div> </div>`; }
+    function getStudentProfileHTML(params) { if (!params || !params.id) return `<p>Student not found.</p>`; return `<div class="grid-container" style="grid-template-columns: 1fr 2fr;"> <div class="form-wrapper" id="profile-details">Loading...</div> <div class="form-wrapper"> <div style="display:flex; justify-content:space-between; align-items:center;"><h2>Academic Records</h2> <button class="btn" style="width:auto; margin-top:0;" onclick="generateReportCardPdf('${params.id}')"><i class="fas fa-file-pdf"></i> Download Report Card</button></div> <div id="profile-exam-results" class="table-responsive" style="margin-top:20px;"></div></div></div><div class="form-wrapper"><h3>Library History</h3><div id="profile-library-books" class="table-responsive"></div></div>`; }
+    function getAddStudentHTML() {  return `<div class="form-wrapper"> <h2>Add New Student</h2> <form id="addStudentForm"> <div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"> <div class="input-group"><label>Student Name</label><input type="text" name="name" required></div> <div class="input-group"><label>Roll Number</label><input type="number" name="roll" required></div> <div class="input-group"><label>Class</label><select name="className" id="studentClass" required></select></div> <div class="input-group"><label>Section</label><select name="section" id="studentSection" required></select></div> <div class="input-group"><label>Guardian's Name</label><input type="text" name="guardianName" required></div> <div class="input-group"><label>Contact Number</label><input type="text" name="contact" required></div> <div class="input-group" style="grid-column: 1 / -1;"><label>Profile Picture URL</label><input type="url" name="profilePicUrl" placeholder="https://example.com/image.jpg"></div> </div> <button type="submit" class="btn">Add Student</button> </form> </div>`; }
+    function getStudentListHTML() { return `<div class="table-wrapper"><div class="table-responsive"><table> <thead><tr><th>Photo</th><th>Name</th><th>Class</th><th>Roll</th><th>Actions</th></tr></thead> <tbody id="allStudentsTableBody"></tbody> </table></div></div>`; }
+    function getTeachersHTML() { return `<div class="form-wrapper"> <h2>Add New Staff</h2> <form id="addStaffForm"> <div class="grid-container"> <div class="input-group"><label>Name</label><input type="text" name="name" required></div> <div class="input-group"><label>Role</label><select name="role" id="staffRole" required onchange="toggleSubjectField()"><option value="teacher">Teacher</option><option value="librarian">Librarian</option></select></div> <div class="input-group" id="subject-input-group"><label>Subject</label><input type="text" name="subject"></div> <div class="input-group"><label>Phone</label><input type="text" name="phone"></div> <div class="input-group"><label>Profile Picture URL</label><input type="url" name="profilePicUrl"></div> <div class="input-group"><label>Email (for login)</label><input type="email" name="email" required></div> <div class="input-group"><label>Password</label><input type="password" name="password" minlength="6" required></div> </div> <button type="submit" class="btn">Add Staff</button> </form> </div> <div class="table-wrapper"><h2>Staff List</h2><div class="table-responsive"><table id="teachersTable"></table></div></div>`; }
+    function getSettingsHTML() { return ` <div class="form-wrapper"> <h2>School Information & PDF Settings</h2> <form id="schoolSettingsForm"> <div class="input-group"><label for="schoolName">School Name</label><input type="text" name="schoolName" id="schoolName" required></div> <div class="input-group"><label for="schoolLogoUrl">School Logo URL</label><input type="url" name="schoolLogoUrl" id="schoolLogoUrl" placeholder="https://example.com/logo.png"></div> <div class="input-group"><label for="principalName">Principal's Name (for signature)</label><input type="text" name="principalName" id="principalName"></div> <div class="input-group"><label for="principalSignatureUrl">Principal's Signature Image URL</label><input type="url" name="principalSignatureUrl" id="principalSignatureUrl" placeholder="https://example.com/signature.png"></div> <button type="submit" class="btn">Save Settings</button> </form> </div> <div class="grid-container"> <div class="form-wrapper"><h3>Class Management</h3><form id="addClassForm" style="display:flex; gap:10px;"><input type="text" id="newClassName" placeholder="Class Name" required style="flex-grow:1;"><button class="btn" type="submit" style="width:auto; margin-top:0;">Add</button></form><ul id="classList" style="list-style-type: none; padding-top: 10px;"></ul></div> <div class="form-wrapper"><h3>Section Management</h3><form id="addSectionForm" style="display:flex; gap:10px;"><input type="text" id="newSectionName" placeholder="Section Name" required style="flex-grow:1;"><button class="btn" type="submit" style="width:auto; margin-top:0;">Add</button></form><ul id="sectionList" style="list-style-type: none; padding-top: 10px;"></ul></div> </div>`; }
+    function getTeacherDashboardHTML() { return `<div class="grid-container" style="grid-template-columns: 2fr 1fr;"> <div> <div class="form-wrapper"> <h2>Today's Classes</h2> <div id="todaysClassesList" class="grid-container"><p>Loading...</p></div> </div> <div class="form-wrapper"> <h2>My Weekly Routine</h2><div id="my-weekly-schedule" class="schedule-grid"></div> </div> </div> <div> <div class="form-wrapper"> <h2>Upcoming Duties</h2> <div id="my-duties">Loading...</div> </div> </div> </div>`; }
+    function getLibraryManagementHTML() { return `<div class="tabs"> <button class="tab-link active" onclick="openTab(event, 'manage-books')">Book Management</button> <button class="tab-link" onclick="openTab(event, 'issue-return')">Issue & Return Books</button> </div> <div id="manage-books" class="tab-content active"> <div class="form-wrapper"> <h2>Add New Book</h2> <form id="addBookForm"> <div class="grid-container"> <div class="input-group"><label>Book Title</label><input type="text" name="title" required></div> <div class="input-group"><label>Author Name</label><input type="text" name="author" required></div> <div class="input-group"><label>ISBN</label><input type="text" name="isbn"></div> <div class="input-group"><label>Total Quantity</label><input type="number" name="totalQuantity" required></div> </div> <button type="submit" class="btn">Add Book</button> </form> </div> <div class="table-wrapper"><h2>All Library Books</h2><div id="allBooksTable" class="table-responsive"></div></div> </div> <div id="issue-return" class="tab-content"> <div class="form-wrapper"> <h2>Issue Book to Student</h2> <form id="issueBookForm"> <div class="grid-container"> <div class="input-group"><label>Select Book</label><select name="bookId" id="issueBookId" required></select></div> <div class="input-group"><label>Select Student</label><select name="studentId" id="issueStudentId" required></select></div> </div> <button type="submit" class="btn">Issue Book</button> </form> </div> <div class="table-wrapper"><h2>Issued Books List</h2><div id="issuedBooksTable" class="table-responsive"></div></div> </div>`;}
+    function getAdmissionManagementHTML() { return ` <div class="tabs"> <button class="tab-link active" onclick="openTab(event, 'applications')">Applications</button> <button class="tab-link" onclick="openTab(event, 'form-settings')">Form Settings</button> </div> <div id="applications" class="tab-content active"> <div class="table-wrapper"> <h2>Pending Admission Applications</h2> <div class="table-responsive"> <table id="applicationsTable"> <thead><tr><th>Applicant Name</th><th>Applying for Class</th><th>Guardian's Contact</th><th>Actions</th></tr></thead> <tbody></tbody> </table> </div> </div> </div> <div id="form-settings" class="tab-content"> <div class="form-wrapper"> <h3>Manage Classes for Admission Form</h3> <p>Add or remove classes that will be shown as options in the public admission form.</p> <form id="addAdmissionClassForm" style="display:flex; gap:10px; margin-top: 15px;"> <input type="text" id="newAdmissionClassName" placeholder="Class Name" required style="flex-grow:1;"> <button class="btn" type="submit" style="width:auto; margin-top:0;">Add Class</button> </form> <ul id="admissionClassList" style="list-style-type: none; padding-top: 10px;"></ul> </div> </div>`;}
 
-    // HTML Generators
-    function getAdminDashboardHTML() { return `<div class="grid-container"><div class="card"><h3><i class="fas fa-users"></i> Total Students</h3><h2 id="total-students">0</h2></div><div class="card"><h3><i class="fas fa-chalkboard-user"></i> Total Staff</h3><h2 id="total-teachers">0</h2></div><div class="card"><h3><i class="fas fa-layer-group"></i> Total Classes</h3><h2 id="total-classes">0</h2></div><div class="card"><h3><i class="fas fa-book"></i> Books in Library</h3><h2 id="total-books">0</h2></div></div><div class="card" style="height: 400px;"><h2>Today's Attendance Rate</h2><canvas id="attendanceChart"></canvas></div>`; }
-    function getTeacherDashboardHTML() { return `<div class="grid-container" style="grid-template-columns: 2fr 1fr;"><div><div class="card"><h2>Today's Classes</h2><div id="todaysClassesList" class="grid-container"><p>Loading...</p></div></div><div class="card"><h2>My Weekly Routine</h2><div id="my-weekly-schedule" class="schedule-grid"></div></div></div><div><div class="card"><h2>Upcoming Duties</h2><div id="my-duties">Loading...</div></div></div></div>`; }
-    function getAddStudentHTML() { return `<div class="form-wrapper"><h2>Add New Student</h2><form id="addStudentForm"><div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"><div class="input-group"><label>Student Name</label><input type="text" name="name" required></div><div class="input-group"><label>Roll Number</label><input type="text" name="roll" required></div><div class="input-group"><label>Class</label><select name="className" id="studentClass" required></select></div><div class="input-group"><label>Section</label><select name="section" id="studentSection" required></select></div><div class="input-group"><label>Guardian's Name</label><input type="text" name="guardianName" required></div><div class="input-group"><label>Contact Number</label><input type="text" name="contact" required></div><div class="input-group"><label>Email (for login)</label><input type="email" name="email" required></div><div class="input-group"><label>Login Password</label><input type="password" name="password" required></div><div class="input-group" style="grid-column: 1 / -1;"><label>Profile Picture URL</label><input type="url" name="profilePicUrl" placeholder="https://example.com/image.jpg"></div></div><button type="submit" class="btn">Add Student</button></form></div>`; }
-    function getStudentListHTML() { return `<div class="table-wrapper"><div class="table-responsive"><table><thead><tr><th>Photo</th><th>Name</th><th>Class</th><th>Roll</th><th>Actions</th></tr></thead><tbody id="allStudentsTableBody"></tbody></table></div></div>`; }
-    function getTeachersHTML() { return `<div class="form-wrapper"><h2>Add New Staff</h2><form id="addStaffForm"><div class="grid-container"><div class="input-group"><label>Name</label><input type="text" name="name" required></div><div class="input-group"><label>Role</label><select name="role" id="staffRole" required onchange="toggleSubjectField()"><option value="teacher">Teacher</option><option value="librarian">Librarian</option></select></div><div class="input-group" id="subject-input-group"><label>Subject</label><input type="text" name="subject"></div><div class="input-group"><label>Phone</label><input type="text" name="phone"></div><div class="input-group"><label>Profile Picture URL</label><input type="url" name="profilePicUrl"></div><div class="input-group"><label>Email (for login)</label><input type="email" name="email" required></div><div class="input-group"><label>Password</label><input type="password" name="password" minlength="6" required></div></div><button type="submit" class="btn">Add Staff</button></form></div><div class="table-wrapper"><h2>Staff List</h2><div class="table-responsive"><table id="teachersTable"></table></div></div>`; }
-    function getSchedulesHTML() { const days=["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]; const adminForm=appState.user.role==='admin' ? `<div class="form-wrapper"><h2>Create Schedule</h2><form id="addScheduleForm"><div class="grid-container" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));"><div class="input-group"><label>Day</label><select name="day" required>${days.map((day, i)=>`<option value="${i}">${day}</option>`).join('')}</select></div><div class="input-group"><label>Class</label><select name="className" id="scheduleClass" required></select></div><div class="input-group"><label>Section</label><select name="section" id="scheduleSection" required></select></div><div class="input-group"><label>Subject</label><input name="subject" required></div><div class="input-group"><label>Teacher</label><select name="teacherId" id="scheduleTeacher" required></select></div><div class="input-group"><label>Start Time</label><input type="time" name="startTime" required></div><div class="input-group"><label>End Time</label><input type="time" name="endTime" required></div></div><button type="submit" class="btn">Add</button></form></div>` : ''; return `${adminForm}<div><div style="display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;"><h2 style="color: var(--text-color);">Weekly Routine</h2><div style="display:flex; gap: 10px; align-items: center;"><select id="routineFilter" onchange="populateScheduleGrid()" style="padding: 10px; border-radius: 8px; border: 1px solid #57606f; background-color: #3b4252; color: var(--text-color);"><option value="all">All Classes</option></select><button class="btn" onclick="generateWordStyleRoutinePdf(event)" style="width:auto; margin-top:0; background: var(--accent-color);"><i class="fas fa-file-pdf"></i> Download PDF</button></div></div><div id="schedule-display" class="schedule-grid">${days.map((day, i)=>`<div class="day-column"><h3>${day}</h3><div id="day-${i}"></div></div>`).join('')}</div></div>`; }
-    function getSettingsHTML() { return `<div class="form-wrapper"><h2>School Information & PDF Settings</h2><form id="schoolSettingsForm"><div class="input-group"><label for="schoolName">School Name</label><input type="text" name="schoolName" id="schoolName" required></div><div class="input-group"><label for="schoolLogoUrl">School Logo URL</label><input type="url" name="schoolLogoUrl" id="schoolLogoUrl" placeholder="https://example.com/logo.png"></div><div class="input-group"><label for="principalName">Principal's Name</label><input type="text" name="principalName" id="principalName"></div><div class="input-group"><label for="principalSignatureUrl">Principal's Signature Image URL</label><input type="url" name="principalSignatureUrl" id="principalSignatureUrl"></div><button type="submit" class="btn">Save</button></form></div><div class="grid-container"><div class="form-wrapper"><h3>Class Management</h3><form id="addClassForm" style="display:flex; gap:10px;"><input type="text" id="newClassName" placeholder="Class Name" required style="flex-grow:1;"><button class="btn" type="submit" style="width:auto; margin-top:0;">Add</button></form><ul id="classList"></ul></div><div class="form-wrapper"><h3>Section Management</h3><form id="addSectionForm" style="display:flex; gap:10px;"><input type="text" id="newSectionName" placeholder="Section Name" required style="flex-grow:1;"><button class="btn" type="submit" style="width:auto; margin-top:0;">Add</button></form><ul id="sectionList"></ul></div></div>`; }
-    function getAttendanceHTML() { return `<div class="form-wrapper"><h2>Take Student Attendance</h2><div class="grid-container" style="grid-template-columns: 1fr 1fr auto; align-items:flex-end;"><div class="input-group"><label>Class & Section</label><select id="attendanceClassSelector"></select></div><div class="input-group"><label>Date</label><input type="date" id="attendanceDate" value="${new Date().toISOString().slice(0,10)}"></div><div id="attendance-actions" style="margin-bottom: 15px; display:none;"><button class="btn" style="width:auto; background: var(--success-color);" onclick="generateAttendanceReportPdf(event)"><i class="fas fa-file-pdf"></i> Monthly Report</button></div></div></div><div class="table-wrapper"><form id="attendanceForm"><div id="attendanceStudentList"><p>Please select a class and date.</p></div><button type="submit" class="btn" id="saveAttendanceBtn" style="display:none;">Save Attendance</button></form></div>`; }
-    function getClassTestsHTML() { return `<div class="form-wrapper"><h2>Create New Class Test</h2><form id="addExamForm"><div class="grid-container"><div class="input-group"><label>Test Name</label><input type="text" name="examName" required></div><div class="input-group"><label>Class</label><select name="className" id="examClass" required></select></div><div class="input-group"><label>Section</label><select name="section" id="examSection" required></select></div><div class="input-group"><label>Subject</label><input type="text" name="subject" required></div><div class="input-group"><label>Total Marks</label><input type="number" name="totalMarks" required></div></div><button type="submit" class="btn">Create Test</button></form></div><div class="table-wrapper"><h2>My Created Tests</h2><table id="examsTable"><thead><tr><th>Name</th><th>Class</th><th>Subject</th><th>Total Marks</th><th>Action</th></tr></thead><tbody></tbody></table></div>`; }
-    function getStudentProfileHTML(params) { if(!params || !params.id) return `<p>Student not found.</p>`; return `<div class="grid-container" style="grid-template-columns: 1fr 2fr;"><div class="card" id="profile-details">Loading...</div><div class="card"><div style="display:flex; justify-content:space-between; align-items:center;"><h2>Academic Records</h2><button class="btn" style="width:auto; margin-top:0;" onclick="generateReportCardPdf(event, '${params.id}')"><i class="fas fa-file-pdf"></i> Download Report Card</button></div><div id="profile-exam-results" class="table-responsive" style="margin-top:20px;"></div></div></div><div class="card"><h3>Library History</h3><div id="profile-library-books" class="table-responsive"></div></div>`; }
-    function getExamManagementHTML() { return `<div class="tabs"><button class="tab-link active" onclick="openTab(event, 'main-exam')">Main Exams & Routine</button><button class="tab-link" onclick="openTab(event, 'room-management')">Room Management</button><button class="tab-link" onclick="openTab(event, 'seat-plan')">Seat Plan</button><button class="tab-link" onclick="openTab(event, 'invigilator-duty')">Invigilator Duty</button></div><div id="main-exam" class="tab-content active"><div class="form-wrapper"><h2>Create Main Exam</h2><form id="addMainExamForm"><div class="grid-container"><div class="input-group"><label>Exam Name</label><input type="text" name="name" required></div><div class="input-group"><label>Start Date</label><input type="date" name="date" required></div></div><button type="submit" class="btn">Create</button></form></div><div class="table-wrapper"><h2>Main Exams</h2><div id="mainExamsList" class="table-responsive"></div></div></div><div id="room-management" class="tab-content"><div class="form-wrapper"><h2>Add New Room</h2><form id="addRoomForm" class="grid-container" style="grid-template-columns: 2fr 1fr auto; align-items: end;"><div class="input-group"><label>Room Name/Number</label><input type="text" name="name" required></div><div class="input-group"><label>Capacity</label><input type="number" name="capacity" required></div><button type="submit" class="btn" style="width:auto; height: 48px; margin-bottom: 15px;">Add</button></form></div><div class="table-wrapper"><h2>Room List</h2><div id="roomsList" class="table-responsive"></div></div></div><div id="seat-plan" class="tab-content"><div class="form-wrapper"><h2>Generate Seat Plan</h2><div class="grid-container"><div class="input-group"><label>Select Exam</label><select id="seatPlanExamSelect" onchange="generateSeatPlan()"></select></div><div class="input-group"><label>Select Class</label><select id="seatPlanClassSelect" onchange="generateSeatPlan()"></select></div></div><div class="input-group"><label>Select Rooms (Hold Ctrl to select multiple)</label><select id="seatPlanRoomSelect" multiple style="height: 150px;" onchange="generateSeatPlan()"></select></div></div><div class="table-wrapper"><div style="display:flex; justify-content:space-between; align-items:center;"><h2>Generated Plan</h2><button class="btn" onclick="generatePdf(event, '#seatPlanDisplay', 'Seat-Plan')" style="width:auto; background: var(--success-color);"><i class="fas fa-file-pdf"></i> Download PDF</button></div><div id="seatPlanDisplay" style="margin-top:20px;">Fill the form to generate a plan.</div></div></div><div id="invigilator-duty" class="tab-content"><div class="form-wrapper"><h2>Create Invigilator Duty Roster</h2><div class="grid-container"><div class="input-group"><label>Select Exam</label><select id="rosterExamSelect" onchange="renderRosterUI()"></select></div><div class="input-group"><label>Date</label><input type="date" id="rosterDate" required onchange="renderRosterUI()"></div></div><div id="rosterRoomTeacherSelection"></div><button class="btn" onclick="saveInvigilatorRoster()">Save</button></div><div class="table-wrapper"><div style="display:flex; justify-content:space-between; align-items:center;"><h2>Duty Roster</h2><button class="btn" onclick="generatePdf(event, '#rosterDisplay', 'Duty-Roster')" style="width:auto; background: var(--success-color);"><i class="fas fa-file-pdf"></i> Download PDF</button></div><div id="rosterDisplay" style="margin-top:20px;">Select exam and date.</div></div></div>`; }
-    function getLibraryManagementHTML() { return `<div class="tabs"><button class="tab-link active" onclick="openTab(event, 'manage-books')">Book Management</button><button class="tab-link" onclick="openTab(event, 'issue-return')">Issue & Return</button></div><div id="manage-books" class="tab-content active"><div class="form-wrapper"><h2>Add New Book</h2><form id="addBookForm"><div class="grid-container"><div class="input-group"><label>Book Title</label><input type="text" name="title" required></div><div class="input-group"><label>Author</label><input type="text" name="author" required></div><div class="input-group"><label>ISBN</label><input type="text" name="isbn"></div><div class="input-group"><label>Total Quantity</label><input type="number" name="totalQuantity" required></div></div><button type="submit" class="btn">Add Book</button></form></div><div class="table-wrapper"><h2>All Books</h2><div id="allBooksTable" class="table-responsive"></div></div></div><div id="issue-return" class="tab-content"><div class="form-wrapper"><h2>Issue Book</h2><form id="issueBookForm"><div class="grid-container"><div class="input-group"><label>Select Book</label><select name="bookId" id="issueBookId" required></select></div><div class="input-group"><label>Select Student</label><select name="studentId" id="issueStudentId" required></select></div></div><button type="submit" class="btn">Issue</button></form></div><div class="table-wrapper"><h2>Issued Books</h2><div id="issuedBooksTable" class="table-responsive"></div></div></div>`; }
-    function getAdmissionManagementHTML() { return `<div class="tabs"><button class="tab-link active" onclick="openTab(event, 'applications')">Applications</button><button class="tab-link" onclick="openTab(event, 'form-settings')">Form Settings</button></div><div id="applications" class="tab-content active"><div class="table-wrapper"><h2>Pending Applications</h2><div class="table-responsive"><table id="applicationsTable"><thead><tr><th>Applicant Name</th><th>Applying for Class</th><th>Contact</th><th>Actions</th></tr></thead><tbody></tbody></table></div></div></div><div id="form-settings" class="tab-content"><div class="form-wrapper"><h3>Manage Admission Classes</h3><p>Classes shown on the public admission form.</p><form id="addAdmissionClassForm" style="display:flex; gap:10px; margin-top: 15px;"><input type="text" id="newAdmissionClassName" placeholder="Class Name" required style="flex-grow:1;"><button class="btn" type="submit" style="width:auto; margin-top:0;">Add</button></form><ul id="admissionClassList"></ul></div></div>`; }
-    function getHomeworkManagementHTML() { return `<div class="form-wrapper"><h2>Add Diary / Homework</h2><form id="addHomeworkForm"><div class="grid-container"><div class="input-group"><label>Class & Section</label><select id="homeworkClassSelector" required></select></div><div class="input-group"><label>Date</label><input type="date" name="date" required value="${new Date().toISOString().slice(0,10)}"></div><div class="input-group" style="grid-column: 1 / -1;"><label>Subject</label><input name="subject" required></div><div class="input-group" style="grid-column: 1 / -1;"><label>Details</label><textarea name="details" rows="4" required></textarea></div><div class="input-group" style="grid-column: 1 / -1;"><label>Attachment URL (Optional)</label><input type="url" name="attachmentUrl" placeholder="https://example.com/image.jpg"></div></div><button type="submit" class="btn">Add Homework</button></form></div><div class="table-wrapper"><h2>Recently Added</h2><div id="homeworkList"></div></div>`; }
-    function getNoticeManagementHTML() { return `<div class="form-wrapper"><h2>Create New Notice</h2><form id="addNoticeForm"><div class="input-group"><label>Title</label><input type="text" name="title" required></div><div class="input-group"><label>Content</label><textarea name="content" rows="5" required></textarea></div><div class="input-group"><label>Attachment URL (Image/PDF - Optional)</label><input type="url" name="fileUrl"></div><button type="submit" class="btn">Post Notice</button></form></div><div class="table-wrapper"><h2>Posted Notices</h2><table id="noticesTable"><thead><tr><th>Date</th><th>Title</th><th>Action</th></tr></thead><tbody></tbody></table></div>`; }
-    function getBillingManagementHTML() { return `<div class="form-wrapper"><h2>Create New Bill</h2><form id="addBillForm"><div class="grid-container"><div class="input-group"><label>Select Student</label><select name="studentId" id="billStudentSelector" required></select></div><div class="input-group"><label>Bill Title</label><input type="text" name="title" required></div><div class="input-group"><label>Amount (BDT)</label><input type="number" name="amount" required></div><div class="input-group"><label>Due Date</label><input type="date" name="dueDate" required></div></div><button type="submit" class="btn">Create Bill</button></form></div><div class="table-wrapper"><h2>Recent Bills</h2><div id="recentBillsList"></div></div>`; }
-    
-    function getStudentDashboardHTML() { return `<div class="grid-container"><div class="card"><h3>আজকের ক্লাস রুটিন</h3><div id="student-today-routine"></div></div><div class="card"><h3>সাম্প্রতিক নোটিশ</h3><div id="student-recent-notices"></div></div></div>`; }
-    function getStudentHomeworkHTML() { return `<div class="card"><h2><i class="fas fa-book-open"></i> দৈনিক বাড়ির কাজ</h2><div id="student-homework-list"></div></div>`; }
-    function getStudentSchedulesHTML() { return `<div class="card"><h2><i class="fas fa-calendar-alt"></i> সাপ্তাহিক ক্লাস রুটিন</h2><div id="student-schedule-display" class="schedule-grid"></div></div>`; }
-    function getStudentAttendanceHTML() { return `<div class="card"><h2><i class="fas fa-user-check"></i> মাসিক হাজিরা রিপোর্ট</h2><p>সবুজ=উপস্থিতি, লাল=অনুপস্থিতি</p><div id="student-attendance-calendar"></div></div>`; }
-    function getStudentResultsHTML() { return `<div class="card"><h2><i class="fas fa-poll"></i> পরীক্ষার ফলাফল</h2><div id="student-exam-results-list"></div></div>`; }
-    function getStudentBillingHTML() { return `<div class="grid-container" style="grid-template-columns: 2fr 1fr;"><div class="card"><h2>বকেয়া বিলসমূহ</h2><table id="student-due-bills-table"></table></div><div class="card"><h2>বিল পরিশোধ করুন</h2><p>সকল বিল ঘরে বসেই পরিশোধ করুন।</p><div class="payment-methods"><img src="https://i.ibb.co/qj8pvTh/b-Kash-logo.png" alt="bKash"><img src="https://i.ibb.co/P9fG11c/rocket-logo.png" alt="Rocket"><img src="https://i.ibb.co/hZjzVpD/nogod-logo.png" alt="Nagad"></div><button class="btn" style="margin-top: 20px;">অনলাইনে পেমেন্ট করুন</button></div></div><div class="card"><h2>পূর্ববর্তী রশিদ</h2><table id="student-payment-history-table"></table></div>`; }
-    function getStudentNoticesHTML() { return `<div class="card"><h2><i class="fas fa-bell"></i> সকল নোটিশ</h2><div id="student-all-notices-list"></div></div>`; }
-    
-    // Data Population Functions
+    // Data Populator Functions
     function populateAdminDashboard(){ 
-        document.getElementById('total-students').textContent = Object.keys(appState.students || {}).length;
-        document.getElementById('total-teachers').textContent = Object.keys(appState.teachers || {}).length + Object.keys(appState.librarians || {}).length;
+        document.getElementById('total-students').textContent = Object.keys(appState.students || {}).length; 
+        const totalTeachers = Object.keys(appState.teachers || {}).length;
+        const totalLibrarians = Object.keys(appState.librarians || {}).length;
+        document.getElementById('total-teachers').textContent = totalTeachers + totalLibrarians;
         document.getElementById('total-classes').textContent = Object.keys(appState.classes || {}).length; 
         document.getElementById('total-books').textContent = Object.keys(appState.library?.books || {}).length; 
-        const ctx = document.getElementById('attendanceChart').getContext('2d');
-        const today = new Date().toISOString().slice(0,10);
-        const todaysAttendance = appState.attendance?.[today] || {};
-        const classData = {};
-        Object.entries(appState.students || {}).forEach(([id, student]) => {
-            const key = `${student.className}___${student.section}`;
-            if (!classData[key]) classData[key] = { present: 0, total: 0 };
-            classData[key].total++;
-            if (todaysAttendance[key]?.[id]?.status === 'present') {
-                classData[key].present++;
-            }
-        });
-        const labels = Object.keys(classData).map(c => c.replace('___', ' - '));
-        const percentages = Object.values(classData).map(data => data.total > 0 ? (data.present / data.total) * 100 : 0);
-        if(attendanceChart) { attendanceChart.destroy(); }
-        Chart.defaults.color = '#d2dae2';
-        attendanceChart = new Chart(ctx, { type: 'bar', data: { labels: labels, datasets: [{ label: 'Attendance Rate (%)', data: percentages, backgroundColor: 'rgba(0, 168, 255, 0.6)', borderColor: 'rgba(0, 168, 255, 1)', borderWidth: 1 }] }, options: { scales: { y: { beginAtZero: true, max: 100, grid: { color: 'rgba(210, 218, 226, 0.2)' } }, x: { grid: { color: 'rgba(210, 218, 226, 0.2)' } } }, responsive: true, maintainAspectRatio: false } }); 
-    }
-    function populateTeacherDashboard() {
-        const container = document.getElementById('todaysClassesList');
-        if(!container) return;
-        const dayMap = [1, 2, 3, 4, 5, -1, 0];
-        const formDayIndex = dayMap[new Date().getDay()];
-        const todaysSchedules = Object.values(appState.schedules || {}).filter(s => s.teacherId === appState.user.uid && parseInt(s.day) === formDayIndex).sort((a, b) => a.startTime.localeCompare(b.startTime));
-        container.innerHTML = (todaysSchedules.length === 0) ? `<p>You have no classes today.</p>` : todaysSchedules.map(s => `<div class="schedule-card"><h4>${s.className} (${s.section})</h4><p><strong>Subject:</strong> ${s.subject}</p><p><strong>Time:</strong> ${s.startTime} - ${s.endTime}</p></div>`).join('');
-        populateMyWeeklySchedule();
-        populateMyDuties();
-    }
-    function populateStudentTable() {
-        const tbody = document.getElementById('allStudentsTableBody');
-        tbody.innerHTML = '';
-        Object.entries(appState.students || {}).sort(([,a],[,b])=> a.className.localeCompare(b.className) || a.roll - b.roll).forEach(([id, s]) => {
-            tbody.innerHTML += `<tr><td><img src="${s.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" class="profile-pic" onerror="this.src='https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'"></td><td>${s.name}</td><td>${s.className} (${s.section})</td><td>${s.roll}</td><td><div class="action-buttons"><button class="btn" style="padding: 5px 10px; font-size: 0.9rem; margin:0;" onclick="navigateTo('student-profile', { id: '${id}' })">View</button>${appState.user.role === 'admin' ? `<button class="action-btn edit-btn" onclick="openEditModal('student', '${id}')"><i class="fas fa-edit"></i></button><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'students')"><i class="fas fa-trash"></i></button>` : ''}</div></td></tr>`;
-        });
-    }
-    function populateTeachersTable() {
-        const table = document.getElementById('teachersTable');
-        table.innerHTML = '<thead><tr><th>Photo</th><th>Name</th><th>Role</th><th>Responsibility</th><th>Email</th><th>Action</th></tr></thead><tbody></tbody>';
-        const tbody = table.querySelector('tbody');
-        Object.entries(appState.teachers || {}).forEach(([uid, t]) => { tbody.innerHTML += `<tr><td><img src="${t.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" class="profile-pic"></td><td>${t.name}</td><td>Teacher</td><td>${t.subject}</td><td>${t.email}</td><td><div class="action-buttons"><button class="action-btn edit-btn" onclick="openEditModal('teacher', '${uid}')"><i class="fas fa-edit"></i></button><button class="action-btn delete-btn" onclick="deleteStaff('${uid}', 'teacher')"><i class="fas fa-trash"></i></button></div></td></tr>`; });
-        Object.entries(appState.librarians || {}).forEach(([uid, l]) => { tbody.innerHTML += `<tr><td><img src="${l.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" class="profile-pic"></td><td>${l.name}</td><td>Librarian</td><td>Library</td><td>${l.email}</td><td><div class="action-buttons"><button class="action-btn edit-btn" onclick="openEditModal('librarian', '${uid}')"><i class="fas fa-edit"></i></button><button class="action-btn delete-btn" onclick="deleteStaff('${uid}', 'librarian')"><i class="fas fa-trash"></i></button></div></td></tr>`; });
-    }
-    function populateScheduleGrid() {
-        const container = document.getElementById('schedule-display');
-        if(!container) return;
-        const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
-        container.innerHTML = days.map((day, i) => `<div class="day-column"><h3>${day}</h3><div id="day-${i}"></div></div>`).join('');
-        const filter = document.getElementById('routineFilter');
-        const classes = [...new Set(Object.values(appState.schedules || {}).map(s => `${s.className}___${s.section}`))];
-        const currentFilterValue = filter.value;
-        filter.innerHTML = '<option value="all">All Classes</option>' + classes.sort().map(c => { const [className, section] = c.split('___'); return `<option value="${c}">${className} (${section})</option>`; }).join('');
-        filter.value = currentFilterValue;
-        let schedulesToDisplay = Object.entries(appState.schedules || {});
-        if (filter.value !== 'all') {
-            const [className, section] = filter.value.split('___');
-            schedulesToDisplay = schedulesToDisplay.filter(([,s]) => s.className === className && s.section === section);
-        }
-        schedulesToDisplay.forEach(([id, s]) => {
-            const dayContainer = document.getElementById(`day-${s.day}`);
-            if (dayContainer) {
-                const teacherName = appState.teachers[s.teacherId]?.name || 'Unknown';
-                dayContainer.innerHTML += `<div class="schedule-card">${appState.user.role === 'admin' ? `<div class="schedule-actions"><button class="action-btn edit-btn" onclick="openEditModal('schedule', '${id}')"><i class="fas fa-edit"></i></button><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'schedules')"><i class="fas fa-trash"></i></button></div>` : ''}<p><strong>${s.className} (${s.section})</strong></p><p>Subject: ${s.subject}</p><p>Teacher: ${teacherName}</p><p>Time: ${s.startTime} - ${s.endTime}</p></div>`;
-            }
-        });
-    }
-    function populateMyWeeklySchedule() {
-        const container = document.getElementById('my-weekly-schedule');
-        if (!container) return;
-        const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
-        container.innerHTML = days.map((day, i) => `<div class="day-column"><h3>${day}</h3><div id="my-day-${i}"></div></div>`).join('');
-        Object.values(appState.schedules || {}).filter(s => s.teacherId === appState.user.uid).forEach(s => {
-            const dayContainer = document.getElementById(`my-day-${s.day}`);
-            if (dayContainer) {
-                dayContainer.innerHTML += `<div class="schedule-card"><p><strong>${s.className} (${s.section})</strong></p><p>Subject: ${s.subject}</p><p>Time: ${s.startTime} - ${s.endTime}</p></div>`;
-            }
-        });
-    }
 
-    function populateMyDuties() {
-        const dutyContainer = document.getElementById('my-duties');
-        if (!dutyContainer) return;
-        const myId = appState.user.uid;
-        let dutiesHtml = '';
-        Object.entries(appState.invigilatorRosters || {}).forEach(([examId, dates]) => {
-            const exam = appState.mainExams[examId];
-            Object.entries(dates).forEach(([date, rooms]) => {
-                Object.entries(rooms).forEach(([roomId, teacherId]) => {
-                    if (teacherId === myId) {
-                        const room = appState.rooms[roomId];
-                        dutiesHtml += `<div class="schedule-card"><p><strong>${exam.name}</strong></p><p><strong>Date:</strong> ${date}</p><p><strong>Room:</strong> ${room.name}</p></div>`;
-                    }
-                });
+        const ctx = document.getElementById('attendanceChart').getContext('2d'); const attendance = appState.attendance || {}; const today = new Date().toISOString().slice(0,10); const todaysAttendance = attendance[today] || {}; const classData = {}; const allStudents = appState.students || {}; const totalStudentsByClass = {}; for(const student of Object.values(allStudents)) { const key = `${student.className}___${student.section}`; totalStudentsByClass[key] = (totalStudentsByClass[key] || 0) + 1; } Object.entries(todaysAttendance).forEach(([classSection, students]) => { let presentCount = 0; Object.values(students).forEach(att => { if(att.status === 'present') presentCount++; }); classData[classSection] = { present: presentCount, total: totalStudentsByClass[classSection] || Object.keys(students).length }; }); const labels = Object.keys(classData).map(c => c.replace('___', ' - ')); const percentages = Object.values(classData).map(data => data.total > 0 ? (data.present / data.total) * 100 : 0); if(attendanceChart) { attendanceChart.destroy(); } attendanceChart = new Chart(ctx, { type: 'bar', data: { labels: labels, datasets: [{ label: 'Attendance Rate (%)', data: percentages, backgroundColor: 'rgba(74, 105, 189, 0.6)', borderColor: 'rgba(74, 105, 189, 1)', borderWidth: 1 }] }, options: { scales: { y: { beginAtZero: true, max: 100 } }, responsive: true, maintainAspectRatio: false } }); 
+    }
+    function populateScheduleGrid() { const container = document.getElementById('schedule-display'); if(!container) return; const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]; container.innerHTML = days.map((day, i) => `<div class="day-column"><h3>${day}</h3><div id="day-${i}"></div></div>`).join(''); const filter = document.getElementById('routineFilter'); const classes = [...new Set(Object.values(appState.schedules || {}).map(s => `${s.className}___${s.section}`))]; const currentFilterValue = filter.value; filter.innerHTML = '<option value="all">All Classes</option>' + classes.sort().map(c => { const [className, section] = c.split('___'); return `<option value="${c}">${className} (${section})</option>`; }).join(''); filter.value = currentFilterValue; let schedulesToDisplay = Object.entries(appState.schedules || {}); if (filter.value !== 'all') { const [className, section] = filter.value.split('___'); schedulesToDisplay = schedulesToDisplay.filter(([,s]) => s.className === className && s.section === section); } schedulesToDisplay.forEach(([id, s]) => { const dayContainer = document.getElementById(`day-${s.day}`); if (dayContainer) { const teacherName = appState.teachers[s.teacherId]?.name || 'Unknown'; dayContainer.innerHTML += `<div class="schedule-card"> ${appState.user.role === 'admin' ? `<div class="schedule-actions"> <button class="action-btn edit-btn" onclick="openEditModal('schedule', '${id}')"><i class="fas fa-edit"></i></button> <button class="action-btn delete-btn" onclick="deleteItem('${id}', 'schedules')"><i class="fas fa-trash"></i></button> </div>` : ''} <p><strong>${s.className} (${s.section})</strong></p> <p>Subject: ${s.subject}</p><p>Teacher: ${teacherName}</p><p>Time: ${s.startTime} - ${s.endTime}</p> </div>`; } }); }
+    function populateAllDropdowns() { populateDropdown(appState.classes, 'studentClass'); populateDropdown(appState.sections, 'studentSection'); populateDropdown(appState.classes, 'scheduleClass'); populateDropdown(appState.sections, 'scheduleSection'); populateDropdownWithKeys(appState.teachers, 'scheduleTeacher', item => `${item.name} (${item.subject})`); }
+    function populateStudentTable() { const tbody = document.getElementById('allStudentsTableBody'); tbody.innerHTML = ''; Object.entries(appState.students || {}).sort(([,a],[,b])=> a.roll-b.roll).sort(([,a],[,b])=>a.className.localeCompare(b.className)).forEach(([id, s]) => { tbody.innerHTML += `<tr> <td><img src="${s.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" class="profile-pic" onerror="this.src='https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'"></td> <td>${s.name}</td><td>${s.className} (${s.section})</td><td>${s.roll}</td> <td><div class="action-buttons"> <button class="btn" data-id="${id}" style="padding: 5px 10px; font-size: 0.9rem; margin:0;" onclick="navigateTo('student-profile', { id: '${id}' })">View Profile</button> ${appState.user.role === 'admin' ? `<button class="action-btn edit-btn" onclick="openEditModal('student', '${id}')"><i class="fas fa-edit"></i></button> <button class="action-btn delete-btn" onclick="deleteItem('${id}', 'students')"><i class="fas fa-trash"></i></button>` : ''} </div></td> </tr>`; }); }
+    function populateTeachersTable() { const table = document.getElementById('teachersTable'); table.innerHTML = '<thead><tr><th>Photo</th><th>Name</th><th>Role</th><th>Subject/Responsibility</th><th>Email</th><th>Action</th></tr></thead><tbody></tbody>'; const tbody = table.querySelector('tbody'); Object.entries(appState.teachers || {}).forEach(([uid, t]) => { tbody.innerHTML += `<tr> <td><img src="${t.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" class="profile-pic" onerror="this.src='https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'"></td> <td>${t.name}</td><td>Teacher</td><td>${t.subject}</td><td>${t.email}</td> <td><div class="action-buttons"> <button class="action-btn edit-btn" onclick="openEditModal('teacher', '${uid}')"><i class="fas fa-edit"></i></button> <button class="action-btn delete-btn" onclick="deleteStaff('${uid}', 'teacher')"><i class="fas fa-trash"></i></button> </div></td> </tr>`; }); Object.entries(appState.librarians || {}).forEach(([uid, l]) => { tbody.innerHTML += `<tr> <td><img src="${l.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" class="profile-pic" onerror="this.src='https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'"></td> <td>${l.name}</td><td>Librarian</td><td>Library Management</td><td>${l.email}</td> <td><div class="action-buttons"> <button class="action-btn edit-btn" onclick="openEditModal('librarian', '${uid}')"><i class="fas fa-edit"></i></button> <button class="action-btn delete-btn" onclick="deleteStaff('${uid}', 'librarian')"><i class="fas fa-trash"></i></button> </div></td> </tr>`; });}
+    function toggleSubjectField(){ const role = document.getElementById('staffRole').value; document.getElementById('subject-input-group').style.display = (role === 'teacher') ? 'flex' : 'none';}
+    function populateSettingsPage() { populateList(appState.classes, 'classList', 'classes'); populateList(appState.sections, 'sectionList', 'sections'); const settings = appState.settings || {}; document.getElementById('schoolName').value = settings.schoolName || ''; document.getElementById('schoolLogoUrl').value = settings.schoolLogoUrl || ''; document.getElementById('principalName').value = settings.principalName || ''; document.getElementById('principalSignatureUrl').value = settings.principalSignatureUrl || ''; }
+    function populateTeacherDashboard() { const container = document.getElementById('todaysClassesList'); if(!container) return; const dayMap = [1, 2, 3, 4, 5, -1, 0]; const formDayIndex = dayMap[new Date().getDay()]; const todaysSchedules = Object.values(appState.schedules || {}).filter(s => s.teacherId === appState.user.uid && parseInt(s.day) === formDayIndex).sort((a, b) => a.startTime.localeCompare(b.startTime)); container.innerHTML = (todaysSchedules.length === 0) ? `<p>You have no classes today.</p>` : todaysSchedules.map(s => ` <div class="schedule-card"> <h4>${s.className} (${s.section})</h4><p><strong>Subject:</strong> ${s.subject}</p><p><strong>Time:</strong> ${s.startTime} - ${s.endTime}</p> </div>`).join(''); populateMyWeeklySchedule(); populateMyDuties(); }
+    function populateMyDuties() { const dutyContainer = document.getElementById('my-duties'); if (!dutyContainer) return; const myId = appState.user.uid; let dutiesHtml = ''; Object.entries(appState.invigilatorRosters || {}).forEach(([examId, dates]) => { const exam = appState.mainExams[examId]; Object.entries(dates).forEach(([date, rooms]) => { Object.entries(rooms).forEach(([roomId, teacherId]) => { if (teacherId === myId) { const room = appState.rooms[roomId]; dutiesHtml += `<div class="schedule-card"><p><strong>${exam.name}</strong></p><p><strong>Date:</strong> ${date}</p><p><strong>Room:</strong> ${room.name}</p></div>`; } }); }); }); dutyContainer.innerHTML = dutiesHtml || '<p>You have no upcoming duties.</p>'; }
+    function populateMyWeeklySchedule() { const container = document.getElementById('my-weekly-schedule'); if (!container) return; const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]; container.innerHTML = days.map((day, i) => `<div class="day-column"><h3>${day}</h3><div id="my-day-${i}"></div></div>`).join(''); Object.values(appState.schedules || {}).filter(s => s.teacherId === appState.user.uid).forEach(s => { const dayContainer = document.getElementById(`my-day-${s.day}`); if (dayContainer) { dayContainer.innerHTML += `<div class="schedule-card"><p><strong>${s.className} (${s.section})</strong></p><p>Subject: ${s.subject}</p><p>Time: ${s.startTime} - ${s.endTime}</p></div>`; } }); }
+    function populateDropdown(data, selectId, isMultiple = false) { const select = document.getElementById(selectId); if (!select) return; if(!isMultiple) select.innerHTML = `<option value="">Select...</option>`; Object.values(data || {}).forEach(item => select.innerHTML += `<option value="${item.name}">${item.name}</option>`); }
+    function populateDropdownWithKeys(data, selectId, displayFormatter, isMultiple = false) { const select = document.getElementById(selectId); if (!select) return; if(!isMultiple) select.innerHTML = `<option value="">Select...</option>`; Object.entries(data || {}).sort(([,a], [,b]) => a.name.localeCompare(b.name)).forEach(([id, item]) => { select.innerHTML += `<option value="${id}">${displayFormatter(item)}</option>`; }); }
+    function populateList(data, listId, path) { const list = document.getElementById(listId); if (!list) return; list.innerHTML = ''; Object.entries(data || {}).forEach(([id, item]) => { list.innerHTML += `<li style="display:flex; justify-content:space-between; align-items:center; padding:8px; border-bottom:1px solid #eee;">${item.name} <button class="action-btn delete-btn" onclick="deleteItem('${id}', '${path}')"><i class="fas fa-trash"></i></button></li>`; }); }
+    function openEditModal(type, id) {
+        const modal = document.getElementById('editModal');
+        const titleEl = document.getElementById('modalTitle');
+        const bodyEl = document.getElementById('modalBody');
+        const dataSources = { ...appState, 'admissionApplications': appState.admissionApplications || {} };
+        const items = type === 'mainExam' ? appState.mainExams : dataSources[type + 's'] || dataSources[type];
+
+        if (!items || !items[id]) {
+            console.error("Item not found:", type, id);
+            return;
+        }
+        
+        const item = items[id];
+        let formHTML = '';
+        
+        if (type === 'mainExam') {
+            const exam = item;
+            titleEl.textContent = `Create/Edit Routine for ${exam.name}`;
+            let routineFieldsHTML = '';
+            Object.entries(appState.classes || {}).sort(([,a], [,b]) => a.name.localeCompare(b.name)).forEach(([classKey, classItem]) => {
+                const routineData = exam.routine || {};
+                const subject = routineData[`${classKey}_subject`] || '';
+                const date = routineData[`${classKey}_date`] || '';
+                const time = routineData[`${classKey}_time`] || '';
+                routineFieldsHTML += `
+                    <div class="form-wrapper" style="padding: 20px; margin-bottom: 15px; border: 1px solid #eee;">
+                        <h3 style="margin-bottom: 15px; color: var(--primary-color);">${classItem.name}</h3>
+                        <div class="input-group"><label>Subject</label><input type="text" name="${classKey}_subject" value="${subject}"></div>
+                        <div class="input-group"><label>Date</label><input type="date" name="${classKey}_date" value="${date}"></div>
+                        <div class="input-group"><label>Time</label><input type="time" name="${classKey}_time" value="${time}"></div>
+                    </div>
+                `;
             });
-        });
-        dutyContainer.innerHTML = dutiesHtml || '<p>You have no upcoming duties.</p>';
+            formHTML = `<form id="examRoutineForm" data-exam-id="${id}">${routineFieldsHTML}<button class="btn" type="submit">Save Routine</button></form>`;
+            bodyEl.innerHTML = formHTML;
+        } else {
+             titleEl.textContent = `Edit ${type.charAt(0).toUpperCase() + type.slice(1)} Information`;
+            if (type === 'student') { formHTML = ` <div class="input-group"><label>Name</label><input type="text" name="name" value="${item.name}" required></div> <div class="input-group"><label>Roll</label><input type="number" name="roll" value="${item.roll}" required></div> <div class="input-group"><label>Profile Picture URL</label><input type="url" name="profilePicUrl" value="${item.profilePicUrl || ''}"></div>`; } 
+            else if (type === 'teacher' || type === 'librarian') { formHTML = ` <div class="input-group"><label>Name</label><input type="text" name="name" value="${item.name}" required></div> ${type === 'teacher' ? `<div class="input-group"><label>Subject</label><input type="text" name="subject" value="${item.subject}" required></div>` : ''} <div class="input-group"><label>Profile Picture URL</label><input type="url" name="profilePicUrl" value="${item.profilePicUrl || ''}"></div>`; } 
+            else if (type === 'schedule') { const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"]; const dayOptions = days.map((d, i) => `<option value="${i}" ${item.day == i ? 'selected' : ''}>${d}</option>`).join(''); formHTML = `<div class="grid-container"> <div class="input-group"><label>Day</label><select name="day">${dayOptions}</select></div> <div class="input-group"><label>Subject</label><input type="text" name="subject" value="${item.subject}" required></div> <div class="input-group"><label>Start Time</label><input type="time" name="startTime" value="${item.startTime}" required></div> <div class="input-group"><label>End Time</label><input type="time" name="endTime" value="${item.endTime}" required></div> </div>`; }
+            else if (type === 'admissionApplication') {
+                formHTML = `
+                    <div class="input-group"><label>Applicant Name</label><input type="text" name="studentName" value="${item.studentName || ''}" required></div>
+                    <div class="input-group"><label>Guardian's Name</label><input type="text" name="guardianName" value="${item.guardianName || ''}" required></div>
+                    <div class="input-group"><label>Guardian's Contact</label><input type="text" name="guardianContact" value="${item.guardianContact || ''}" required></div>
+                    <div class="input-group"><label>Applying for Class</label><input type="text" name="className" value="${item.className || ''}" required></div>
+                `;
+            }
+            bodyEl.innerHTML = `<form id="editForm" data-type="${type}" data-id="${id}">${formHTML}<button type="submit" class="btn">Update</button></form>`;
+        }
+        
+        modal.style.display = "block";
     }
-    function populateSettingsPage() {
-        populateList(appState.classes, 'classList', 'classes');
-        populateList(appState.sections, 'sectionList', 'sections');
-        const settings = appState.settings || {};
-        document.getElementById('schoolName').value = settings.schoolName || '';
-        document.getElementById('schoolLogoUrl').value = settings.schoolLogoUrl || '';
-        document.getElementById('principalName').value = settings.principalName || '';
-        document.getElementById('principalSignatureUrl').value = settings.principalSignatureUrl || '';
-    }
+    function attachEventListeners() { document.body.addEventListener('click', e => { const navLink = e.target.closest('.nav-link'); if (navLink) { e.preventDefault(); if(navLink.id === 'logout-btn') { mainAuth.signOut().then(() => window.location.reload()); return; } navigateTo(navLink.getAttribute('href').substring(1)); } if (e.target.closest('.hamburger-menu')) document.getElementById('sidebar').classList.toggle('active'); }); document.body.addEventListener('submit', handleFormSubmits); }
+    function closeModal() { document.getElementById('editModal').style.display = "none"; }
+    window.onclick = (event) => { if (event.target == document.getElementById('editModal')) closeModal(); }
+    
     function populateAttendancePage() {
-        populateClassSectionDropdown('attendanceClassSelector');
-        document.getElementById('attendanceClassSelector').onchange = loadStudentsForAttendance;
+        const selector = document.getElementById('attendanceClassSelector');
+        if (!selector) return;
+        selector.innerHTML = '<option value="">Select Class & Section...</option>';
+        const classes = appState.classes || {};
+        const sections = appState.sections || {};
+        for (const classKey in classes) {
+            for (const sectionKey in sections) {
+                const classSectionValue = `${classes[classKey].name}___${sections[sectionKey].name}`;
+                selector.innerHTML += `<option value="${classSectionValue}">${classes[classKey].name} - ${sections[sectionKey].name}</option>`;
+            }
+        }
+        selector.onchange = loadStudentsForAttendance;
         document.getElementById('attendanceDate').onchange = loadStudentsForAttendance;
     }
+    
     function loadStudentsForAttendance() {
         const classSection = document.getElementById('attendanceClassSelector').value;
         const date = document.getElementById('attendanceDate').value;
         const studentListDiv = document.getElementById('attendanceStudentList');
         const saveBtn = document.getElementById('saveAttendanceBtn');
         const actionsDiv = document.getElementById('attendance-actions');
-        if (!classSection || !date) { studentListDiv.innerHTML = '<p>Please select a class and date.</p>'; saveBtn.style.display = 'none'; actionsDiv.style.display = 'none'; return; }
+
+        if (!classSection || !date) {
+            studentListDiv.innerHTML = '<p>Please select a class and date to view students.</p>';
+            saveBtn.style.display = 'none';
+            actionsDiv.style.display = 'none';
+            return;
+        }
+
         actionsDiv.style.display = 'block';
         const [className, section] = classSection.split('___');
         const students = Object.entries(appState.students || {}).filter(([,s]) => s.className === className && s.section === section).sort(([,a],[,b])=> a.roll - b.roll);
-        if (students.length === 0) { studentListDiv.innerHTML = '<p>No students found.</p>'; saveBtn.style.display = 'none'; return; }
+        
+        if (students.length === 0) {
+            studentListDiv.innerHTML = '<p>No students found in this class.</p>';
+            saveBtn.style.display = 'none';
+            return;
+        }
+
         let html = '';
         const todaysAttendance = appState.attendance?.[date]?.[classSection] || {};
         students.forEach(([id, student]) => {
             const status = todaysAttendance[id]?.status || 'present';
-            html += `<div class="attendance-row"><span>${student.roll}. ${student.name}</span><div class="attendance-status"><input type="radio" id="present_${id}" name="status_${id}" value="present" ${status === 'present' ? 'checked' : ''}><label for="present_${id}">Present</label><input type="radio" id="absent_${id}" name="status_${id}" value="absent" ${status === 'absent' ? 'checked' : ''}><label for="absent_${id}">Absent</label></div></div>`;
+            html += `
+                <div class="attendance-row">
+                    <span>${student.roll}. ${student.name}</span>
+                    <div class="attendance-status">
+                        <input type="radio" id="present_${id}" name="status_${id}" value="present" ${status === 'present' ? 'checked' : ''}>
+                        <label for="present_${id}">Present</label>
+                        <input type="radio" id="absent_${id}" name="status_${id}" value="absent" ${status === 'absent' ? 'checked' : ''}>
+                        <label for="absent_${id}">Absent</label>
+                    </div>
+                </div>
+            `;
         });
         studentListDiv.innerHTML = html;
         saveBtn.style.display = 'block';
     }
+
     function populateClassTestsPage() {
         populateDropdown(appState.classes, 'examClass');
         populateDropdown(appState.sections, 'examSection');
         const tbody = document.querySelector('#examsTable tbody');
         tbody.innerHTML = '';
         const myExams = Object.entries(appState.exams || {}).filter(([,exam]) => exam.createdBy === appState.user.uid);
-        if (myExams.length === 0) { tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No tests created.</td></tr>'; return; }
+        if (myExams.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">You have not created any tests yet.</td></tr>';
+            return;
+        }
         myExams.forEach(([id, exam]) => {
-            tbody.innerHTML += `<tr><td>${exam.examName}</td><td>${exam.className} (${exam.section})</td><td>${exam.subject}</td><td>${exam.totalMarks}</td><td><button class="btn" style="padding: 5px 10px; font-size: 0.9rem; width: auto;" onclick="openMarkEntryModal('${id}')">Enter Marks</button><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'exams')"><i class="fas fa-trash"></i></button></td></tr>`;
+            tbody.innerHTML += `
+                <tr>
+                    <td>${exam.examName}</td>
+                    <td>${exam.className} (${exam.section})</td>
+                    <td>${exam.subject}</td>
+                    <td>${exam.totalMarks}</td>
+                    <td>
+                        <button class="btn" style="padding: 5px 10px; font-size: 0.9rem; width: auto;" onclick="openMarkEntryModal('${id}')">Enter Marks</button>
+                        <button class="action-btn delete-btn" onclick="deleteItem('${id}', 'exams')"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `;
         });
     }
+    
+    function openMarkEntryModal(examId) {
+        const exam = appState.exams[examId];
+        const students = Object.entries(appState.students || {}).filter(([,s]) => s.className === exam.className && s.section === exam.section).sort(([,a],[,b]) => a.roll - b.roll);
+        const marks = appState.marks?.[examId] || {};
+
+        let formHTML = `<form id="markEntryForm" data-exam-id="${examId}">`;
+        students.forEach(([id, student]) => {
+            formHTML += `
+                <div class="input-group" style="display: grid; grid-template-columns: 2fr 1fr; align-items: center;">
+                    <label>${student.roll}. ${student.name}</label>
+                    <input type="number" name="${id}" value="${marks[id]?.marksObtained || ''}" placeholder="Marks" max="${exam.totalMarks}" class="mark-input">
+                </div>
+            `;
+        });
+        formHTML += `<button type="submit" class="btn">Save Marks</button></form>`;
+        document.getElementById('modalTitle').textContent = `Enter Marks for "${exam.examName}"`;
+        document.getElementById('modalBody').innerHTML = formHTML;
+        document.getElementById('editModal').style.display = 'block';
+    }
+    
     function populateStudentProfilePage(params) {
         if (!params || !params.id) return;
-        const student = appState.students[params.id]; if (!student) return;
-        document.getElementById('profile-details').innerHTML = `<img src="${student.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 20px; border: 4px solid var(--primary-color);"><h2 style="text-align: center; color: var(--primary-color);">${student.name}</h2><p style="text-align:center; margin-top:10px;"><strong>Class:</strong> ${student.className} (${student.section})</p><p style="text-align:center;"><strong>Roll:</strong> ${student.roll}</p><p style="text-align:center;"><strong>Guardian:</strong> ${student.guardianName}</p><p style="text-align:center;"><strong>Contact:</strong> ${student.contact}</p>`;
-        const resultsDiv = document.getElementById('profile-exam-results'); let tableHTML = '<table><thead><tr><th>Test Name</th><th>Subject</th><th>Marks</th><th>Total</th></tr></thead><tbody>'; let hasResults = false;
+        const student = appState.students[params.id];
+        if (!student) return;
+        document.getElementById('profile-details').innerHTML = `
+            <img src="${student.profilePicUrl || 'https://i.ibb.co/6yT1WfX/school-logo-placeholder.png'}" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; display: block; margin: 0 auto 20px; border: 4px solid var(--bg-color);">
+            <h2 style="text-align: center; color: var(--primary-color);">${student.name}</h2>
+            <p style="text-align:center; margin-top:10px;"><strong>Class:</strong> ${student.className} (${student.section})</p>
+            <p style="text-align:center;"><strong>Roll:</strong> ${student.roll}</p>
+            <p style="text-align:center;"><strong>Guardian:</strong> ${student.guardianName}</p>
+            <p style="text-align:center;"><strong>Contact:</strong> ${student.contact}</p>
+        `;
+        
+        const resultsDiv = document.getElementById('profile-exam-results');
+        let tableHTML = '<table><thead><tr><th>Test Name</th><th>Subject</th><th>Marks Obtained</th><th>Total Marks</th></tr></thead><tbody>';
+        let hasResults = false;
         Object.entries(appState.marks || {}).forEach(([examId, examMarks]) => {
             if(examMarks[params.id]){
                 const exam = appState.exams[examId];
-                if(exam) { hasResults = true; tableHTML += `<tr><td>${exam.examName}</td><td>${exam.subject}</td><td>${examMarks[params.id].marksObtained}</td><td>${exam.totalMarks}</td></tr>`; }
+                if(exam) {
+                    hasResults = true;
+                    tableHTML += `
+                        <tr>
+                            <td>${exam.examName}</td>
+                            <td>${exam.subject}</td>
+                            <td>${examMarks[params.id].marksObtained}</td>
+                            <td>${exam.totalMarks}</td>
+                        </tr>
+                    `;
+                }
             }
         });
-        if (!hasResults) tableHTML += '<tr><td colspan="4" style="text-align:center;">No results found.</td></tr>';
-        resultsDiv.innerHTML = tableHTML + '</tbody></table>';
+        if (!hasResults) tableHTML += '<tr><td colspan="4" style="text-align:center;">No test results found.</td></tr>';
+        tableHTML += '</tbody></table>';
+        resultsDiv.innerHTML = tableHTML;
+
         const libraryDiv = document.getElementById('profile-library-books');
         let libraryHTML = '<table><thead><tr><th>Book Title</th><th>Issue Date</th><th>Due Date</th></tr></thead><tbody>';
         const issuedBooks = Object.values(appState.library?.issuedBooks || {}).filter(issue => issue.studentId === params.id && issue.status === 'issued');
-        if (issuedBooks.length > 0) { issuedBooks.forEach(issue => { const book = appState.library.books[issue.bookId]; if(book) { libraryHTML += `<tr><td>${book.title}</td><td>${issue.issueDate}</td><td>${issue.dueDate}</td></tr>`; }}); } 
-        else { libraryHTML += '<tr><td colspan="3" style="text-align:center;">No books issued.</td></tr>'; }
-        libraryDiv.innerHTML = libraryHTML + '</tbody></table>';
+        if (issuedBooks.length > 0) {
+            issuedBooks.forEach(issue => {
+                const book = appState.library.books[issue.bookId];
+                if(book) {
+                    libraryHTML += `<tr><td>${book.title}</td><td>${issue.issueDate}</td><td>${issue.dueDate}</td></tr>`;
+                }
+            });
+        } else {
+            libraryHTML += '<tr><td colspan="3" style="text-align:center;">No books currently issued.</td></tr>';
+        }
+        libraryHTML += '</tbody></table>';
+        libraryDiv.innerHTML = libraryHTML;
     }
+
     function populateExamManagementPage() { 
-        document.getElementById('mainExamsList').innerHTML = '<table><thead><tr><th>Name</th><th>Date</th><th>Actions</th></tr></thead><tbody>' + Object.entries(appState.mainExams || {}).map(([id, exam]) => `<tr><td>${exam.name}</td><td>${exam.date}</td><td><div class="action-buttons"><button class="action-btn edit-btn" onclick="openEditModal('mainExam', '${id}')" title="Routine"><i class="fas fa-calendar-alt"></i></button><button class="btn" onclick="generateExamRoutinePdf(event, '${id}')" style="margin:0; padding: 5px 12px; font-size: 0.8rem; background: var(--success-color);">PDF</button><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'mainExams')"><i class="fas fa-trash"></i></button></div></td></tr>`).join('') + '</tbody></table>';
-        document.getElementById('roomsList').innerHTML = '<table><thead><tr><th>Name</th><th>Capacity</th><th>Action</th></tr></thead><tbody>' + Object.entries(appState.rooms || {}).map(([id, room]) => `<tr><td>${room.name}</td><td>${room.capacity}</td><td><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'rooms')"><i class="fas fa-trash"></i></button></td></tr>`).join('') + '</tbody></table>';
+        const mainExamsList = document.getElementById('mainExamsList');
+        mainExamsList.innerHTML = '<table><thead><tr><th>Name</th><th>Date</th><th>Actions</th></tr></thead><tbody>' + 
+            Object.entries(appState.mainExams || {}).map(([id, exam]) => `
+                <tr><td>${exam.name}</td><td>${exam.date}</td>
+                <td><div class="action-buttons">
+                    <button class="action-btn edit-btn" onclick="openEditModal('mainExam', '${id}')" title="Create/Edit Routine"><i class="fas fa-calendar-alt"></i></button>
+                    <button class="btn" onclick="generateExamRoutinePdf('${id}')" style="margin:0; padding: 5px 12px; font-size: 0.8rem; background-color: var(--success-color);">Routine PDF</button>
+                    <button class="action-btn delete-btn" onclick="deleteItem('${id}', 'mainExams')"><i class="fas fa-trash"></i></button>
+                </div></td></tr>
+            `).join('') + '</tbody></table>';
+        
+        const roomsList = document.getElementById('roomsList');
+        roomsList.innerHTML = '<table><thead><tr><th>Name/Number</th><th>Capacity</th><th>Action</th></tr></thead><tbody>' +
+            Object.entries(appState.rooms || {}).map(([id, room]) => `
+                <tr><td>${room.name}</td><td>${room.capacity}</td>
+                <td><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'rooms')"><i class="fas fa-trash"></i></button></td></tr>
+            `).join('') + '</tbody></table>';
+        
         populateDropdownWithKeys(appState.mainExams, 'seatPlanExamSelect', item => item.name);
         populateDropdown(appState.classes, 'seatPlanClassSelect');
-        populateDropdownWithKeys(appState.rooms, 'seatPlanRoomSelect', item => `${item.name} (Cap: ${item.capacity})`, true);
+        populateDropdownWithKeys(appState.rooms, 'seatPlanRoomSelect', item => `${item.name} (Capacity: ${item.capacity})`, true);
         populateDropdownWithKeys(appState.mainExams, 'rosterExamSelect', item => item.name);
     }
-    function populateLibraryManagementPage() {
-        populateBooksTable();
-        populateIssuedBooksTable();
-        populateDropdownWithKeys(appState.library?.books || {}, 'issueBookId', book => `${book.title} | Avail: ${book.availableQuantity}`);
-        populateDropdownWithKeys(appState.students || {}, 'issueStudentId', student => `${student.name} (${student.className})`);
-    }
+
     function populateAdmissionManagementPage() {
         const applications = appState.admissionApplications || {};
         const tbody = document.querySelector('#applicationsTable tbody');
         tbody.innerHTML = '';
-        if (Object.keys(applications).length === 0) { tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No pending applications.</td></tr>'; return; }
-        Object.entries(applications).forEach(([id, app]) => { tbody.innerHTML += `<tr><td>${app.studentName}</td><td>${app.className}</td><td>${app.guardianContact}</td><td><div class="action-buttons"><button class="action-btn edit-btn" onclick="openEditModal('admissionApplication', '${id}')" title="View/Edit"><i class="fas fa-edit"></i></button><button class="btn" style="background: var(--success-color); padding: 5px 10px; font-size: 0.9rem;" onclick="approveApplication('${id}')">Approve</button><button class="btn" style="background: var(--danger-color); padding: 5px 10px; font-size: 0.9rem;" onclick="rejectApplication('${id}')">Reject</button></div></td></tr>`; });
-        populateList(appState.admissionSettings?.formClasses || {}, 'admissionClassList', 'admissionSettings/formClasses');
-    }
-    function populateHomeworkManagementPage() {
-        populateClassSectionDropdown('homeworkClassSelector');
-        const homeworkList = document.getElementById('homeworkList');
-        homeworkList.innerHTML = '';
-        Object.entries(appState.homework || {}).forEach(([classSection, dates]) => {
-            Object.entries(dates).forEach(([date, homeworks]) => {
-                Object.entries(homeworks).forEach(([id, hw]) => {
-                    homeworkList.innerHTML += `<div class="homework-item">${date} - <strong>${classSection.replace('___','-')}</strong>: ${hw.subject} <button class="action-btn delete-btn" onclick="deleteItem('${id}', 'homework/${classSection}/${date}')"><i class="fas fa-trash"></i></button></div>`;
-                });
+        if (Object.keys(applications).length === 0) {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;">No pending applications.</td></tr>';
+        } else {
+            Object.entries(applications).forEach(([id, app]) => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${app.studentName}</td>
+                        <td>${app.className}</td>
+                        <td>${app.guardianContact}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn edit-btn" onclick="openEditModal('admissionApplication', '${id}')" title="View/Edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn" style="background-color: var(--success-color); padding: 5px 10px; font-size: 0.9rem; width: auto;" onclick="approveApplication('${id}')">Approve</button>
+                                <button class="btn" style="background-color: var(--danger-color); padding: 5px 10px; font-size: 0.9rem; width: auto;" onclick="rejectApplication('${id}')">Reject</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
             });
-        });
-    }
-    function populateNoticeManagementPage() {
-        const tbody = document.querySelector('#noticesTable tbody');
-        tbody.innerHTML = '';
-        Object.entries(appState.notices || {}).sort(([,a], [,b]) => b.createdAt.localeCompare(a.createdAt)).forEach(([id, notice]) => {
-            tbody.innerHTML += `<tr><td>${new Date(notice.createdAt).toLocaleDateString()}</td><td>${notice.title}</td><td><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'notices')"><i class="fas fa-trash"></i></button></td></tr>`;
-        });
-    }
-    function populateBillingManagementPage() {
-        populateDropdownWithKeys(appState.students, 'billStudentSelector', s => `${s.name} (${s.className} - ${s.roll})`);
-    }
-
-    function populateStudentDashboard() {
-        const student = appState.user;
-        const dayMap = [1, 2, 3, 4, 5, -1, 0];
-        const today = dayMap[new Date().getDay()];
-        const routineContainer = document.getElementById('student-today-routine');
-        const todaySchedules = Object.values(appState.schedules || {}).filter(s => s.className === student.className && s.section === student.section && parseInt(s.day) === today);
-        let routineHTML = '<table><tbody>';
-        todaySchedules.forEach(item => { routineHTML += `<tr><td><strong>${item.startTime}</strong></td><td>${item.subject} (${appState.teachers[item.teacherId]?.name || 'N/A'})</td></tr>`; });
-        routineContainer.innerHTML = todaySchedules.length ? routineHTML + '</tbody></table>' : '<p>আজ কোনো ক্লাস নেই।</p>';
-        const noticesContainer = document.getElementById('student-recent-notices');
-        let noticesHTML = '';
-        Object.values(appState.notices || {}).slice(0, 3).forEach(notice => { noticesHTML += `<div class="notice-item"><div class="date">${new Date(notice.createdAt).toLocaleDateString()}</div><p><strong>${notice.title}</strong></p></div>`; });
-        noticesContainer.innerHTML = noticesHTML || '<p>কোনো নতুন নোটিশ নেই।</p>';
-    }
-    function populateStudentHomework() {
-        const student = appState.user;
-        const classSectionKey = `${student.className}___${student.section}`;
-        const homeworkData = appState.homework?.[classSectionKey] || {};
-        const list = document.getElementById('student-homework-list');
-        list.innerHTML = '';
-        Object.entries(homeworkData).sort((a,b) => b[0].localeCompare(a[0])).forEach(([date, homeworks]) => {
-            Object.values(homeworks).forEach(hw => {
-                list.innerHTML += `<div class="homework-item"><div class="date">${date} | <strong>বিষয়:</strong> ${hw.subject} | <strong>শিক্ষক:</strong> ${hw.teacherName || 'N/A'}</div><p>${hw.details}</p>${hw.attachmentUrl ? `<a href="${hw.attachmentUrl}" target="_blank"><i class="fas fa-paperclip"></i> সংযুক্তি দেখুন</a>` : ''}</div>`;
-            });
-        });
-        if (!list.innerHTML) list.innerHTML = '<p>কোনো বাড়ির কাজ পাওয়া যায়নি।</p>';
-    }
-    function populateStudentSchedule() {
-        const student = appState.user;
-        const container = document.getElementById('student-schedule-display');
-        const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
-        container.innerHTML = days.map((day, i) => `<div class="day-column"><h3>${day}</h3><div id="student-day-${i}"></div></div>`).join('');
-        Object.values(appState.schedules || {}).filter(s => s.className === student.className && s.section === student.section).forEach(s => {
-            const dayContainer = document.getElementById(`student-day-${s.day}`);
-            if (dayContainer) dayContainer.innerHTML += `<div class="schedule-card"><p><strong>${s.subject}</strong></p><p>শিক্ষক: ${appState.teachers[s.teacherId]?.name || 'N/A'}</p><p>সময়: ${s.startTime} - ${s.endTime}</p></div>`;
-        });
-    }
-    function populateStudentAttendance() {
-        const student = appState.user;
-        const calendar = document.getElementById('student-attendance-calendar');
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
-        const daysInMonth = new Date(year, month + 1, 0).getDate();
-        let calendarHTML = `<div style="display: flex; flex-wrap: wrap; gap: 5px;">`;
-        for (let i = 1; i <= daysInMonth; i++) {
-            const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-            const classSection = `${student.className}___${student.section}`;
-            const status = appState.attendance?.[date]?.[classSection]?.[student.id]?.status;
-            let color = '#57606f';
-            if (status === 'present') color = 'rgba(76, 209, 55, 0.7)';
-            else if (status === 'absent') color = 'rgba(232, 65, 24, 0.7)';
-            calendarHTML += `<div style="width: 40px; height: 40px; background: ${color}; display: grid; place-items: center; border-radius: 5px; border: 1px solid #4a4a4a;">${i}</div>`;
         }
-        calendar.innerHTML = calendarHTML + `</div>`;
+        
+        const admissionClasses = appState.admissionSettings?.formClasses || {};
+        populateList(admissionClasses, 'admissionClassList', 'admissionSettings/formClasses');
     }
-    function populateStudentResults() {
-        const studentId = appState.user.id;
-        const list = document.getElementById('student-exam-results-list');
-        let html = `<table><thead><tr><th>পরীক্ষার নাম</th><th>বিষয়</th><th>প্রাপ্ত নম্বর</th><th>মোট নম্বর</th></tr></thead><tbody>`;
-        let hasResults = false;
-        Object.entries(appState.marks || {}).forEach(([examId, studentsMarks]) => {
-            if(studentsMarks[studentId]) {
-                hasResults = true;
-                const exam = appState.exams[examId];
-                const mark = studentsMarks[studentId];
-                html += `<tr><td>${exam.examName}</td><td>${exam.subject}</td><td>${mark.marksObtained}</td><td>${exam.totalMarks}</td></tr>`;
-            }
-        });
-        if(!hasResults) html += `<tr><td colspan="4" style="text-align: center;">কোনো পরীক্ষার ফলাফল পাওয়া যায়নি।</td></tr>`;
-        list.innerHTML = html + `</tbody></table> <button class="btn" style="width: auto; margin-top:20px;" onclick="generateReportCardPdf(event, '${studentId}')"><i class="fas fa-file-pdf"></i> সম্পূর্ণ রিপোর্ট কার্ড ডাউনলোড</button>`;
-    }
-    function populateStudentBilling() {
-        const studentId = appState.user.id;
-        const dueBills = Object.values(appState.bills || {}).filter(bill => bill.studentId === studentId && bill.status === 'due');
-        const dueTable = document.getElementById('student-due-bills-table');
-        let dueHtml = '<thead><tr><th>বিলের বিবরণ</th><th>পরিমাণ (টাকা)</th><th>শেষ তারিখ</th><th>অবস্থা</th></tr></thead><tbody>';
-        dueBills.forEach(bill => { dueHtml += `<tr><td>${bill.title}</td><td>${bill.amount}</td><td>${bill.dueDate}</td><td><span style="color:var(--danger-color);">বকেয়া</span></td></tr>`; });
-        if (dueBills.length === 0) dueHtml += '<tr><td colspan="4" style="text-align:center;">কোনো বকেয়া বিল নেই।</td></tr>';
-        dueTable.innerHTML = dueHtml + '</tbody>';
-    }
-    function populateStudentNotices() {
-        const list = document.getElementById('student-all-notices-list');
-        list.innerHTML = '';
-        Object.values(appState.notices || {}).forEach(notice => { list.innerHTML += `<div class="notice-item"><div class="date">${new Date(notice.createdAt).toLocaleDateString()}</div><p><strong>${notice.title}</strong></p><p>${notice.content}</p>${notice.fileUrl ? `<a href="${notice.fileUrl}" target="_blank"><i class="fas fa-file-pdf"></i> বিস্তারিত ফাইল</a>` : ''}</div>`; });
-        if(!list.innerHTML) list.innerHTML = '<p>কোনো নোটিশ নেই।</p>';
-    }
+    
+    function approveApplication(applicationId) {
+        const application = appState.admissionApplications[applicationId];
+        if (!application) {
+            alert('Application not found!');
+            return;
+        }
 
-    // --- Form submission logic is unchanged ---
-    function handleFormSubmits(e) {
-        e.preventDefault();
-        const form = e.target;
-        const button = form.querySelector('button[type="submit"]');
-        button.disabled = true; button.textContent = 'Processing...';
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        const schoolId = appState.schoolId;
-
-        const actions = {
-            'addHomeworkForm': () => {
-                const classSection = document.getElementById('homeworkClassSelector').value;
-                if (!classSection) return Promise.reject(new Error("Please select a class."));
-                data.teacherId = appState.user.uid; data.teacherName = appState.user.name;
-                return db.ref(`schools/${schoolId}/homework/${classSection}/${data.date}`).push(data).then(() => { alert('Homework added!'); form.reset(); });
-            },
-            'addNoticeForm': () => { data.createdAt = new Date().toISOString(); return db.ref(`schools/${schoolId}/notices`).push(data).then(() => { alert('Notice posted!'); form.reset(); }); },
-            'addBillForm': () => { data.status = 'due'; data.createdAt = new Date().toISOString(); return db.ref(`schools/${schoolId}/bills`).push(data).then(() => { alert('Bill created!'); form.reset(); }); },
-            'addStudentForm': () => db.ref(`schools/${schoolId}/students`).push(data).then(() => { alert('Student added!'); form.reset(); navigateTo('student-list'); }),
-            'addStaffForm': () => {
-                return secondaryAuth.createUserWithEmailAndPassword(data.email, data.password).then(cred => {
-                    const staffData = {name: data.name, phone: data.phone, email: data.email, profilePicUrl: data.profilePicUrl, subject: data.subject || null};
-                    const updates = {};
-                    updates[`schools/${schoolId}/${data.role}s/${cred.user.uid}`] = staffData;
-                    updates[`schools/${schoolId}/roles/${data.role}s/${cred.user.uid}`] = true;
-                    updates[`user_school_map/${cred.user.uid}`] = schoolId;
-                    return db.ref().update(updates);
-                }).then(() => { alert('Staff added!'); form.reset(); secondaryAuth.signOut(); });
-            },
-            'addScheduleForm': () => db.ref(`schools/${schoolId}/schedules`).push(data).then(() => { alert('Schedule added!'); form.reset(); }),
-            'addClassForm': () => db.ref(`schools/${schoolId}/classes`).push({ name: document.getElementById('newClassName').value.trim() }).then(() => form.reset()),
-            'addSectionForm': () => db.ref(`schools/${schoolId}/sections`).push({ name: document.getElementById('newSectionName').value.trim() }).then(() => form.reset()),
-            'addAdmissionClassForm': () => db.ref(`schools/${schoolId}/admissionSettings/formClasses`).push({ name: document.getElementById('newAdmissionClassName').value.trim() }).then(() => form.reset()),
-            'schoolSettingsForm': () => db.ref(`schools/${schoolId}/settings`).update(data).then(() => alert('Settings saved!')),
-            'editForm': () => {
-                const path = form.dataset.type === 'admissionApplication' ? `admissionApplications/${form.dataset.id}` : `students/${form.dataset.id}`;
-                return db.ref(`schools/${schoolId}/${path}`).update(data).then(() => { alert('Updated!'); closeModal(); });
-            },
-            'addExamForm': () => { data.createdBy = appState.user.uid; return db.ref(`schools/${schoolId}/exams`).push(data).then(() => { alert('Test created!'); form.reset(); }); },
-            'attendanceForm': () => {
-                const date = document.getElementById('attendanceDate').value; const classSection = document.getElementById('attendanceClassSelector').value;
-                const updates = {};
-                for(const [key, value] of formData.entries()){ updates[`/schools/${schoolId}/attendance/${date}/${classSection}/${key.replace('status_','')}`] = { status: value }; }
-                return db.ref().update(updates).then(() => alert('Attendance saved!'));
-            },
-            'markEntryForm': () => {
-                const examId = form.dataset.examId; const updates = {};
-                for(const [key, value] of formData.entries()){ if (value.trim() !== '') updates[`/schools/${schoolId}/marks/${examId}/${key}`] = { marksObtained: parseFloat(value) }; }
-                return db.ref().update(updates).then(() => { alert('Marks saved!'); closeModal(); });
-            },
-            'addMainExamForm': () => db.ref(`schools/${schoolId}/mainExams`).push(data).then(() => { alert('Exam added!'); form.reset(); }),
-            'addRoomForm': () => db.ref(`schools/${schoolId}/rooms`).push(data).then(() => { alert('Room added!'); form.reset(); }),
-            'examRoutineForm': () => {
-                const updates = {};
-                for (const [key, value] of formData.entries()) { if (value) updates[`/schools/${appState.schoolId}/mainExams/${form.dataset.examId}/routine/${key}`] = value; }
-                return db.ref().update(updates).then(() => { alert('Routine saved!'); closeModal(); });
-            },
-            'addBookForm': () => { data.availableQuantity = parseInt(data.totalQuantity); return db.ref(`schools/${schoolId}/library/books`).push(data).then(() => { alert('Book added!'); form.reset(); }); },
-            'issueBookForm': () => {
-                const book = appState.library.books[data.bookId];
-                if (!book || book.availableQuantity < 1) return Promise.reject(new Error("Book unavailable."));
-                const issueData = {bookId: data.bookId, studentId: data.studentId, issueDate: new Date().toISOString().slice(0, 10), dueDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10), status: 'issued'};
-                const updates = {};
-                updates[`schools/${schoolId}/library/books/${data.bookId}/availableQuantity`] = book.availableQuantity - 1;
-                updates[`schools/${schoolId}/library/issuedBooks/${db.ref().push().key}`] = issueData;
-                return db.ref().update(updates).then(() => { alert('Book issued!'); form.reset(); });
-            }
+        const newStudentData = {
+            name: application.studentName,
+            guardianName: application.guardianName,
+            contact: application.guardianContact,
+            className: application.className,
+            section: 'A', // Default section, can be changed later
+            roll: '',     // Roll should be assigned manually
+            profilePicUrl: application.profilePicUrl || ''
         };
 
-        const action = actions[form.id];
-        if (action) {
-            action().catch(err => alert("Error: " + err.message))
-                  .finally(() => { 
-                      button.disabled = false; 
-                      const originalText = form.id.includes('add') ? (form.id === 'addStaffForm' ? 'Add Staff' : 'Add') : 'Save Changes';
-                      button.textContent = (form.id === 'addStudentForm') ? 'Add Student' : originalText;
-                  });
-        } else { button.disabled = false; }
+        if (confirm(`Are you sure you want to approve ${application.studentName} and add them to the student list?`)) {
+            db.ref(`schools/${appState.schoolId}/students`).push(newStudentData)
+                .then(() => {
+                    return db.ref(`schools/${appState.schoolId}/admissionApplications/${applicationId}`).remove();
+                })
+                .then(() => {
+                    alert('Application approved and student has been added successfully!');
+                })
+                .catch(err => alert('Error: ' + err.message));
+        }
     }
 
-    function openLoginTab(evt, tabName) {
-        document.querySelectorAll('#login-box .tab-content').forEach(tc => tc.classList.remove('active'));
-        document.querySelectorAll('#login-box .tab-link').forEach(tl => tl.classList.remove('active'));
+    function rejectApplication(applicationId) {
+        if (confirm('Are you sure you want to reject and permanently delete this application?')) {
+            db.ref(`schools/${appState.schoolId}/admissionApplications/${applicationId}`).remove()
+                .then(() => alert('Application rejected and removed.'))
+                .catch(err => alert('Error: ' + err.message));
+        }
+    }
+
+
+    function openTab(evt, tabName) {
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        document.querySelectorAll('.tab-link').forEach(tl => tl.classList.remove('active'));
         document.getElementById(tabName).classList.add('active');
         evt.currentTarget.classList.add('active');
     }
-    function attachEventListeners() { 
-        document.body.addEventListener('click', e => { 
-            const navLink = e.target.closest('#app-wrapper .nav-link'); 
-            if (navLink) { 
-                e.preventDefault(); 
-                if(navLink.id === 'logout-btn') { mainAuth.signOut().then(() => window.location.reload()); return; } 
-                navigateTo(navLink.getAttribute('href').substring(1)); 
-            } 
-            if (e.target.closest('#hamburger-menu')) document.getElementById('sidebar').classList.toggle('active'); 
-        }); 
-        document.body.addEventListener('submit', handleFormSubmits); 
-    }
-    function attachStudentEventListeners() {
-        document.body.addEventListener('click', e => {
-            const navLink = e.target.closest('#student-app-wrapper .student-nav-link');
-            if (navLink) { e.preventDefault(); navigateToStudentPage(navLink.getAttribute('href').substring(1)); }
-            if (e.target.closest('#student-logout-btn')) { if (confirm('আপনি কি লগআউট করতে চান?')) window.location.reload(); }
-            if (e.target.closest('#student-hamburger-menu')) { document.getElementById('student-sidebar').classList.toggle('active'); }
-        });
-    }
-    function closeModal() { document.getElementById('editModal').style.display = "none"; }
-    window.onclick = (event) => { if (event.target == document.getElementById('editModal')) closeModal(); }
-    function deleteItem(id, path) { if (confirm('Are you sure?')) db.ref(`schools/${appState.schoolId}/${path}/${id}`).remove().catch(err => alert(err.message)); }
-    function deleteStaff(uid, role) { if (confirm(`Are you sure you want to delete this ${role}?`)) alert("Deletion restricted in demo."); }
-    function openTab(evt, tabName) {
-        const parent = evt.target.closest('.tabs').nextElementSibling.parentElement;
-        parent.querySelectorAll('.tab-content').forEach(tc => tc.style.display = "none");
-        parent.querySelectorAll('.tab-link').forEach(tl => tl.classList.remove('active'));
-        parent.querySelector('#' + tabName).style.display = "block";
-        evt.currentTarget.classList.add('active');
-    }
-    function populateAllDropdowns() {
-        populateDropdown(appState.classes, 'studentClass');
-        populateDropdown(appState.sections, 'studentSection');
-        populateDropdown(appState.classes, 'scheduleClass');
-        populateDropdown(appState.sections, 'scheduleSection');
-        populateDropdownWithKeys(appState.teachers, 'scheduleTeacher', item => `${item.name} (${item.subject})`);
-    }
-    function populateDropdown(data, selectId) {
-        const select = document.getElementById(selectId);
-        if (!select) return;
-        select.innerHTML = `<option value="">Select...</option>` + Object.values(data || {}).map(item => `<option value="${item.name}">${item.name}</option>`).join('');
-    }
-    function populateDropdownWithKeys(data, selectId, formatter) {
-        const select = document.getElementById(selectId);
-        if (!select) return;
-        select.innerHTML = `<option value="">Select...</option>` + Object.entries(data || {}).sort(([,a], [,b]) => a.name.localeCompare(b.name)).map(([id, item]) => `<option value="${id}">${formatter(item)}</option>`).join('');
-    }
-    function populateClassSectionDropdown(selectId) {
-        const selector = document.getElementById(selectId); if (!selector) return;
-        selector.innerHTML = '<option value="">Select Class & Section...</option>';
-        Object.values(appState.classes || {}).forEach(c => {
-            Object.values(appState.sections || {}).forEach(s => {
-                selector.innerHTML += `<option value="${c.name}___${s.name}">${c.name} - ${s.name}</option>`;
-            });
-        });
-    }
-    function populateList(data, listId, path) {
-        const list = document.getElementById(listId);
-        if (!list) return;
-        list.innerHTML = Object.entries(data || {}).map(([id, item]) => `<li style="display:flex; justify-content:space-between; align-items:center; padding:8px; border-bottom:1px solid #4a4a4a;">${item.name}<button class="action-btn delete-btn" onclick="deleteItem('${id}', '${path}')"><i class="fas fa-trash"></i></button></li>`).join('');
-    }
-    function toggleSubjectField() {
-        document.getElementById('subject-input-group').style.display = (document.getElementById('staffRole').value === 'teacher') ? 'flex' : 'none';
-    }
-
-    function openEditModal(type, id) {
-        const modal = document.getElementById('editModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
-
-        if (type === 'student') {
-            const student = appState.students[id];
-            modalTitle.textContent = `Edit ${student.name}`;
-            modalBody.innerHTML = `
-                <form id="editForm" data-type="student" data-id="${id}">
-                    <div class="grid-container">
-                        <div class="input-group"><label>Student Name</label><input type="text" name="name" value="${student.name || ''}" required></div>
-                        <div class="input-group"><label>Roll Number</label><input type="text" name="roll" value="${student.roll || ''}" required></div>
-                        <div class="input-group"><label>Email</label><input type="email" name="email" value="${student.email || ''}" required></div>
-                        <div class="input-group"><label>Password</label><input type="text" name="password" value="${student.password || ''}" required></div>
-                        <div class="input-group"><label>Guardian's Name</label><input type="text" name="guardianName" value="${student.guardianName || ''}" required></div>
-                        <div class="input-group"><label>Contact</label><input type="text" name="contact" value="${student.contact || ''}" required></div>
-                    </div>
-                    <button type="submit" class="btn">Save Changes</button>
-                </form>
-            `;
-        }
-        // Add more 'else if' blocks here for other types like 'teacher', 'schedule', etc.
-        modal.style.display = 'block';
-    }
-
-    // --- PDF & HELPER FUNCTIONS ---
-    function updateButtonState(button, isProcessing) {
-        if (!button) return;
-        if (isProcessing) {
-            button.dataset.originalText = button.innerHTML;
-            button.disabled = true;
-            button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> প্রসেসিং...`;
-        } else {
-            button.disabled = false;
-            if(button.dataset.originalText) button.innerHTML = button.dataset.originalText;
-        }
-    }
     
-    async function generateWordStyleRoutinePdf(event) {
-        const button = event.target.closest('button');
-        updateButtonState(button, true);
+    async function generatePdf(elementSelector, fileName, title) {
+        const { jsPDF } = window.jspdf;
+        const content = document.querySelector(elementSelector);
+        if (!content) { console.error("PDF content not found!"); return; }
+
+        const pdfWrapper = document.getElementById('pdf-container');
+        pdfWrapper.innerHTML = ''; 
+
+        const header = document.createElement('div');
+        header.style.textAlign = 'center'; header.style.marginBottom = '20px'; header.style.borderBottom = '2px solid black'; header.style.paddingBottom = '10px';
+        const logoUrl = appState.settings?.schoolLogoUrl;
+        const schoolName = document.createElement('h1'); schoolName.textContent = appState.settings?.schoolName || 'School Name';
+        const docTitle = document.createElement('h3'); docTitle.textContent = title || fileName.replace(/-/g, ' ');
         
-        if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF === 'undefined') {
-            alert("PDF library (jsPDF) failed to load. Please check your internet connection and refresh the page.");
-            updateButtonState(button, false);
-            return;
-        }
-
-        try {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            if (typeof doc.autoTable !== 'function') {
-                alert("PDF Table library (jsPDF-AutoTable) failed to load. Please check your internet connection and refresh the page.");
-                updateButtonState(button, false);
-                return;
-            }
-
-            doc.setFontSize(18);
-            doc.text(appState.settings.schoolName || 'School Name', 105, 15, { align: 'center' });
-            doc.setFontSize(14);
-            doc.text('Class Routine', 105, 22, { align: 'center' });
-            
-            let schedules = Object.values(appState.schedules || {});
-            const filter = document.getElementById('routineFilter').value;
-            if (filter !== 'all') {
-                const [className, section] = filter.split('___');
-                schedules = schedules.filter(s => s.className === className && s.section === section);
-            }
-
-            const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
-            const head = [['Time', 'Class', 'Subject', 'Teacher']];
-            let startY = 30;
-
-            days.forEach(dayName => {
-                const dayIndex = days.indexOf(dayName);
-                const daySchedules = schedules
-                    .filter(s => parseInt(s.day) === dayIndex)
-                    .sort((a,b) => a.startTime.localeCompare(b.startTime));
-
-                if (daySchedules.length > 0) {
-                    if (startY > 250) { 
-                        doc.addPage();
-                        startY = 15;
-                    }
-                    doc.setFontSize(12);
-                    doc.setFont(undefined, 'bold');
-                    doc.text(dayName, 14, startY);
-                    
-                    const body = daySchedules.map(s => [
-                        `${s.startTime} - ${s.endTime}`,
-                        `${s.className} (${s.section})`,
-                        s.subject,
-                        appState.teachers[s.teacherId]?.name || 'N/A'
-                    ]);
-                    
-                    doc.autoTable({
-                        head: head,
-                        body: body,
-                        startY: startY + 5,
-                        theme: 'grid',
-                        headStyles: { fillColor: [44, 62, 80] }
-                    });
-                    startY = doc.autoTable.previous.finalY + 15;
+        if(logoUrl) {
+            try {
+                const response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(logoUrl)}`);
+                const blob = await response.blob();
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    const base64data = reader.result;                
+                    const img = document.createElement('img');
+                    img.src = base64data;
+                    img.style.width = '80px'; img.style.height = '80px'; img.style.marginBottom = '10px';
+                    header.appendChild(img);
+                    header.appendChild(schoolName);
+                    header.appendChild(docTitle);
+                    createAndDownloadPdf(pdfWrapper, header, content, fileName);
                 }
-            });
-
-            doc.save('Class-Routine.pdf');
-        } catch (error) {
-            console.error("PDF Generation failed:", error);
-            alert("An unexpected error occurred while generating the PDF.");
-        } finally {
-            updateButtonState(button, false);
+            } catch(e) {
+                console.error("CORS issue with logo, proceeding without it.", e);
+                header.appendChild(schoolName); header.appendChild(docTitle);
+                createAndDownloadPdf(pdfWrapper, header, content, fileName);
+            }
+        } else {
+             header.appendChild(schoolName); header.appendChild(docTitle);
+             createAndDownloadPdf(pdfWrapper, header, content, fileName);
         }
     }
     
-    async function generatePdf(event, elementId, fileName) {
-        const button = event.target.closest('button');
-        updateButtonState(button, true);
-        
-        if (typeof window.html2canvas === 'undefined' || typeof window.jspdf === 'undefined') {
-            alert("PDF generation libraries failed to load. Please check your connection and refresh.");
-            updateButtonState(button, false);
-            return;
-        }
+    async function createAndDownloadPdf(wrapper, header, content, fileName) {
+        const { jsPDF } = window.jspdf;
+        const mainContent = content.cloneNode(true);
+        const footer = document.createElement('div');
+        footer.style.textAlign = 'right'; footer.style.marginTop = '50px'; footer.style.paddingTop = '10px';
+        const principalName = document.createElement('p');
+        principalName.innerHTML = `_______________________<br><strong>${appState.settings?.principalName || 'Principal'}</strong>`;
+        principalName.style.margin = '0';
+        footer.appendChild(principalName);
 
+        wrapper.appendChild(header);
+        wrapper.appendChild(mainContent);
+        wrapper.appendChild(footer);
+        
         try {
-            const { jsPDF } = window.jspdf;
-            const content = document.querySelector(elementId);
-            const canvas = await html2canvas(content, { scale: 2 });
+            const canvas = await html2canvas(wrapper, { scale: 2 });
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jsPDF('p', 'mm', 'a4');
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = pdf.internal.pageSize.getHeight();
-            const canvasWidth = canvas.width;
-            const canvasHeight = canvas.height;
-            const ratio = canvasWidth / canvasHeight;
-            let width = pdfWidth;
-            let height = width / ratio;
-            if (height > pdfHeight) {
-                height = pdfHeight;
-                width = height * ratio;
-            }
-            pdf.addImage(imgData, 'PNG', 0, 0, width, height);
+            const pdf = new jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfWidth = pdf.internal.pageSize.getWidth() - 80;
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            pdf.addImage(imgData, 'PNG', 40, 40, pdfWidth, pdfHeight);
             pdf.save(`${fileName}.pdf`);
         } catch (error) {
             console.error("PDF generation failed:", error);
-            alert("Failed to generate PDF from content.");
+            alert("Sorry, could not generate the PDF.");
         } finally {
-            updateButtonState(button, false);
+             wrapper.innerHTML = '';
         }
     }
-    
-    async function generateReportCardPdf(event, studentId) {
-        const button = event.target.closest('button');
-        updateButtonState(button, true);
-        alert('Report card PDF generation is a complex feature and needs to be implemented fully.');
-        setTimeout(() => updateButtonState(button, false), 1000);
-    }
-    
-    async function generateAttendanceReportPdf(event) {
-        const button = event.target.closest('button');
-        updateButtonState(button, true);
 
-        if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF === 'undefined') {
-            alert("PDF library (jsPDF) failed to load. Please check your internet connection and refresh.");
-            updateButtonState(button, false);
+    function generateExamRoutinePdf(examId) {
+        const exam = appState.mainExams[examId];
+        if (!exam || !exam.routine) { alert('No routine has been created for this exam.'); return; }
+        const routineContainer = document.createElement('div');
+        routineContainer.id = 'exam-routine-pdf';
+        let tableHTML = `<table border="1" style="width:100%; border-collapse: collapse; text-align: center;"><thead><tr><th>Class</th><th>Subject</th><th>Date</th><th>Time</th></tr></thead><tbody>`;
+        Object.entries(appState.classes || {}).sort(([,a],[,b])=>a.name.localeCompare(b.name)).forEach(([classKey, classItem]) => {
+            const subjectKey = Object.keys(exam.routine).find(k => k.startsWith(classKey) && k.endsWith('_subject'));
+            if (subjectKey) {
+                 const subject = exam.routine[subjectKey];
+                 if (subject) {
+                    const date = exam.routine[subjectKey.replace('_subject', '_date')] || '';
+                    const time = exam.routine[subjectKey.replace('_subject', '_time')] || '';
+                    tableHTML += `<tr><td>${classItem.name}</td><td>${subject}</td><td>${date}</td><td>${time}</td></tr>`;
+                }
+            }
+        });
+        tableHTML += '</tbody></table>';
+        routineContainer.innerHTML = tableHTML;
+        document.body.appendChild(routineContainer);
+        generatePdf('#exam-routine-pdf', `Exam-Routine-${exam.name}`, `${exam.name} Routine`);
+        document.body.removeChild(routineContainer);
+    }
+
+    function generateSeatPlan() {
+        const examId = document.getElementById('seatPlanExamSelect').value;
+        const classId = document.getElementById('seatPlanClassSelect').value;
+        const selectedRoomOptions = document.getElementById('seatPlanRoomSelect').selectedOptions;
+        const display = document.getElementById('seatPlanDisplay');
+        if(!examId || !classId || selectedRoomOptions.length === 0) {
+             display.innerHTML = 'Please select an exam, a class, and at least one room.'; return;
+        }
+
+        const students = Object.entries(appState.students || {}).filter(([,s]) => s.className === classId).map(s => s[1]).sort((a,b) => a.roll - b.roll);
+        const rooms = Array.from(selectedRoomOptions).map(opt => ({ id: opt.value, ...appState.rooms[opt.value] }));
+        
+        let html = '';
+        let studentIndex = 0;
+        rooms.forEach(room => {
+            html += `<div class="day-column"><h3>Room: ${room.name} (Capacity: ${room.capacity})</h3><table><thead><tr><th>Roll</th><th>Name</th></tr></thead><tbody>`;
+            for(let i=0; i < room.capacity && studentIndex < students.length; i++) {
+                const student = students[studentIndex];
+                html += `<tr><td>${student.roll}</td><td>${student.name}</td></tr>`;
+                studentIndex++;
+            }
+            html += `</tbody></table></div>`;
+        });
+        if(studentIndex < students.length) {
+            html += `<p style="color: var(--danger-color); margin-top: 20px;"><strong>Warning:</strong> ${students.length - studentIndex} students could not be seated. Please add more rooms.</p>`;
+        }
+        display.innerHTML = `<div class="schedule-grid">${html}</div>`;
+    }
+
+    function renderRosterUI() {
+        const examId = document.getElementById('rosterExamSelect').value;
+        const date = document.getElementById('rosterDate').value;
+        const container = document.getElementById('rosterRoomTeacherSelection');
+        const display = document.getElementById('rosterDisplay');
+        if (!examId || !date) { container.innerHTML = ''; display.innerHTML = 'Please select an exam and date.'; return; }
+        const existingRoster = appState.invigilatorRosters?.[examId]?.[date] || {};
+        let html = '';
+        Object.entries(appState.rooms || {}).forEach(([roomId, room]) => {
+            html += `<div class="input-group"><label>Room: ${room.name}</label><select id="roster_teacher_${roomId}">`;
+            html += '<option value="">Select Teacher...</option>';
+            Object.entries(appState.teachers || {}).forEach(([teacherId, teacher]) => {
+                html += `<option value="${teacherId}" ${existingRoster[roomId] === teacherId ? 'selected' : ''}>${teacher.name}</option>`;
+            });
+            html += `</select></div>`;
+        });
+        container.innerHTML = html;
+        let displayHtml = `<h3>${appState.mainExams[examId].name} - ${date}</h3><table><thead><tr><th>Room</th><th>Invigilator</th></tr></thead><tbody>`;
+        Object.entries(existingRoster).forEach(([roomId, teacherId]) => {
+            displayHtml += `<tr><td>${appState.rooms[roomId]?.name}</td><td>${appState.teachers[teacherId]?.name}</td></tr>`;
+        });
+        displayHtml += '</tbody></table>';
+        display.innerHTML = displayHtml;
+    }
+
+    function saveInvigilatorRoster() {
+        const examId = document.getElementById('rosterExamSelect').value;
+        const date = document.getElementById('rosterDate').value;
+        if(!examId || !date) { alert('Please select an exam and date.'); return; }
+        const updates = {};
+        Object.keys(appState.rooms || {}).forEach(roomId => {
+            const teacherId = document.getElementById(`roster_teacher_${roomId}`).value;
+            if(teacherId) {
+                updates[`/schools/${appState.schoolId}/invigilatorRosters/${examId}/${date}/${roomId}`] = teacherId;
+            } else {
+                 updates[`/schools/${appState.schoolId}/invigilatorRosters/${examId}/${date}/${roomId}`] = null;
+            }
+        });
+        db.ref().update(updates).then(() => {
+            alert('Roster saved successfully!');
+            renderRosterUI();
+        }).catch(err => alert('Error: ' + err.message));
+    }
+
+    // --- Library Functions ---
+    function populateLibraryManagementPage() {
+        populateBooksTable();
+        populateIssuedBooksTable();
+        populateDropdownWithKeys(appState.library?.books || {}, 'issueBookId', book => `${book.title} by ${book.author} | Available: ${book.availableQuantity}`);
+        populateDropdownWithKeys(appState.students || {}, 'issueStudentId', student => `${student.name} (Class: ${student.className})`);
+    }
+    function populateBooksTable() {
+        const container = document.getElementById('allBooksTable');
+        let tableHTML = '<table><thead><tr><th>Title</th><th>Author</th><th>ISBN</th><th>Total</th><th>Available</th><th>Action</th></tr></thead><tbody>';
+        Object.entries(appState.library?.books || {}).forEach(([id, book]) => {
+            tableHTML += `<tr><td>${book.title}</td><td>${book.author}</td><td>${book.isbn || 'N/A'}</td><td>${book.totalQuantity}</td><td>${book.availableQuantity}</td><td><button class="action-btn delete-btn" onclick="deleteItem('${id}', 'library/books')"><i class="fas fa-trash"></i></button></td></tr>`;
+        });
+        tableHTML += '</tbody></table>';
+        container.innerHTML = tableHTML;
+    }
+    function populateIssuedBooksTable() {
+        const container = document.getElementById('issuedBooksTable');
+        let tableHTML = '<table><thead><tr><th>Book Title</th><th>Student Name</th><th>Issue Date</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+        Object.entries(appState.library?.issuedBooks || {}).sort(([,a], [,b]) => b.issueDate.localeCompare(a.issueDate)).forEach(([id, issue]) => {
+            const book = appState.library.books[issue.bookId];
+            const student = appState.students[issue.studentId];
+            if (book && student) {
+                tableHTML += `<tr><td>${book.title}</td><td>${student.name}</td><td>${issue.issueDate}</td><td>${issue.dueDate}</td><td><span style="color: ${issue.status === 'issued' ? 'var(--warning-color)' : 'var(--success-color)'}; font-weight: bold;">${issue.status}</span></td><td>${issue.status === 'issued' ? `<button class="btn" style="padding: 5px 10px; font-size: 0.9rem;" onclick="returnBook('${id}', '${issue.bookId}')">Return</button>` : issue.returnDate}</td></tr>`;
+            }
+        });
+        tableHTML += '</tbody></table>';
+        container.innerHTML = tableHTML;
+    }
+    function returnBook(issueId, bookId) {
+        if (!confirm("Are you sure you want to mark this book as returned?")) return;
+        const book = appState.library.books[bookId];
+        const updates = {};
+        updates[`schools/${appState.schoolId}/library/books/${bookId}/availableQuantity`] = (book.availableQuantity || 0) + 1;
+        updates[`schools/${appState.schoolId}/library/issuedBooks/${issueId}/status`] = 'returned';
+        updates[`schools/${appState.schoolId}/library/issuedBooks/${issueId}/returnDate`] = new Date().toISOString().slice(0, 10);
+        db.ref().update(updates).then(() => {
+            alert('Book returned successfully!');
+        }).catch(err => alert('Error: ' + err.message));
+    }
+
+    // --- NEW PDF Generation Functions ---
+    function generateAttendanceReportPdf() {
+        const classSection = document.getElementById('attendanceClassSelector').value;
+        const dateStr = document.getElementById('attendanceDate').value;
+        if (!classSection) {
+            alert("Please select a class first.");
             return;
         }
+        
+        const [className, section] = classSection.split('___');
+        const date = new Date(dateStr);
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const monthName = date.toLocaleString('default', { month: 'long' });
 
-        try {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
-            
-            if (typeof doc.autoTable !== 'function') {
-                alert("PDF Table library (jsPDF-AutoTable) failed to load. Please check your internet connection and refresh.");
-                updateButtonState(button, false);
-                return;
-            }
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: 'landscape' });
 
-            const classSection = document.getElementById('attendanceClassSelector').value;
-            const dateStr = document.getElementById('attendanceDate').value;
-            if (!classSection || !dateStr) {
-                alert("Please select a class and date first.");
-                updateButtonState(button, false);
-                return;
-            }
-            
-            const [className, section] = classSection.split('___');
-            const monthYear = new Date(dateStr).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        doc.setFontSize(18);
+        doc.text(`${appState.settings?.schoolName || 'School Name'}`, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+        doc.setFontSize(14);
+        doc.text(`Attendance Report for ${className} (${section}) - ${monthName} ${year}`, doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
 
-            doc.setFontSize(16);
-            doc.text(`${appState.settings.schoolName || 'School'}`, 105, 15, { align: 'center' });
-            doc.setFontSize(12);
-            doc.text(`Monthly Attendance Report: ${className} (${section})`, 105, 22, { align: 'center' });
-            doc.text(`Month: ${monthYear}`, 105, 29, { align: 'center' });
+        const students = Object.entries(appState.students || {}).filter(([,s]) => s.className === className && s.section === section).sort(([,a],[,b]) => a.roll - b.roll);
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const attendanceData = appState.attendance || {};
 
-            const students = Object.entries(appState.students || {})
-                .filter(([, s]) => s.className === className && s.section === section)
-                .sort(([, a], [, b]) => a.roll - b.roll);
-            
-            const head = [['Roll', 'Name', 'Present', 'Absent', 'Attendance %']];
-            const body = students.map(([id, student]) => {
-                let present = 0, absent = 0;
-                const attendanceData = appState.attendance || {};
-                Object.keys(attendanceData).forEach(date => {
-                    const status = attendanceData[date]?.[classSection]?.[id]?.status;
-                    if (status === 'present') present++;
-                    if (status === 'absent') absent++;
-                });
-                const total = present + absent;
-                const percentage = total > 0 ? ((present / total) * 100).toFixed(2) + '%' : 'N/A';
-                return [student.roll, student.name, present, absent, percentage];
-            });
-
-            doc.autoTable({
-                head: head,
-                body: body,
-                startY: 35,
-                theme: 'grid',
-                headStyles: { fillColor: [44, 62, 80] }
-            });
-
-            doc.save(`Attendance-Report-${className}-${section}-${monthYear}.pdf`);
-        } catch (error) {
-            console.error("PDF Generation failed:", error);
-            alert("An unexpected error occurred while generating the attendance report.");
-        } finally {
-            updateButtonState(button, false);
+        const head = [['Roll', 'Name']];
+        for (let i = 1; i <= daysInMonth; i++) {
+            head[0].push(String(i));
         }
+        head[0].push('Present');
+        head[0].push('Absent');
+        head[0].push('%');
+
+        const body = [];
+        students.forEach(([studentId, student]) => {
+            let presentCount = 0;
+            let absentCount = 0;
+            const row = [student.roll, student.name];
+            for (let i = 1; i <= daysInMonth; i++) {
+                const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+                const status = attendanceData[fullDate]?.[classSection]?.[studentId]?.status;
+                if (status === 'present') {
+                    row.push('P');
+                    presentCount++;
+                } else if (status === 'absent') {
+                    row.push('A');
+                    absentCount++;
+                } else {
+                    row.push('-');
+                }
+            }
+            const totalDays = presentCount + absentCount;
+            const percentage = totalDays > 0 ? ((presentCount / totalDays) * 100).toFixed(1) : 'N/A';
+            row.push(presentCount);
+            row.push(absentCount);
+            row.push(percentage);
+            body.push(row);
+        });
+
+        doc.autoTable({
+            head: head,
+            body: body,
+            startY: 40,
+            theme: 'grid',
+            styles: { fontSize: 8, halign: 'center' },
+            headStyles: { fillColor: [44, 62, 80] }
+        });
+
+        doc.save(`Attendance-${className}-${monthName}.pdf`);
     }
-    
+
+    function generateReportCardPdf(studentId) {
+        const student = appState.students[studentId];
+        if (!student) { alert("Student not found!"); return; }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // Header
+        doc.setFontSize(22);
+        doc.setFont('helvetica', 'bold');
+        doc.text(appState.settings?.schoolName || 'School Name', doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+        doc.setFontSize(16);
+        doc.setFont('helvetica', 'normal');
+        doc.text('Student Report Card', doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
+
+        // Student Info
+        doc.setFontSize(12);
+        doc.text(`Student Name: ${student.name}`, 14, 50);
+        doc.text(`Class: ${student.className} (${student.section})`, 14, 57);
+        doc.text(`Roll Number: ${student.roll}`, 14, 64);
+
+        // Marks Table
+        const head = [['Test Name', 'Subject', 'Marks Obtained', 'Total Marks']];
+        const body = [];
+        let totalMarksObtained = 0;
+        let totalMaxMarks = 0;
+
+        Object.entries(appState.marks || {}).forEach(([examId, examMarks]) => {
+            if (examMarks[studentId]) {
+                const exam = appState.exams[examId];
+                if (exam) {
+                    const obtained = parseFloat(examMarks[studentId].marksObtained);
+                    const total = parseFloat(exam.totalMarks);
+                    body.push([exam.examName, exam.subject, obtained, total]);
+                    totalMarksObtained += obtained;
+                    totalMaxMarks += total;
+                }
+            }
+        });
+
+        doc.autoTable({ head: head, body: body, startY: 75 });
+        
+        // Summary
+        const finalY = doc.lastAutoTable.finalY + 15;
+        doc.setFontSize(12);
+        doc.setFont('helvetica', 'bold');
+        doc.text('Summary:', 14, finalY);
+        doc.setFont('helvetica', 'normal');
+        doc.text(`Total Marks Obtained: ${totalMarksObtained}`, 14, finalY + 7);
+        doc.text(`Total Maximum Marks: ${totalMaxMarks}`, 14, finalY + 14);
+        if (totalMaxMarks > 0) {
+            const percentage = ((totalMarksObtained / totalMaxMarks) * 100).toFixed(2);
+            doc.setFont('helvetica', 'bold');
+            doc.text(`Percentage: ${percentage}%`, 14, finalY + 21);
+        }
+        
+        // Footer Signature
+        const pageHeight = doc.internal.pageSize.height;
+        doc.line(140, pageHeight - 30, 195, pageHeight - 30); // Signature line
+        doc.text("Principal's Signature", 142, pageHeight - 22);
+
+        doc.save(`Report-Card-${student.name}.pdf`);
+    }
+
+    function generateWordStyleRoutinePdf() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        const schoolName = appState.settings?.schoolName || 'School Name';
+        const selectedClassText = document.getElementById('routineFilter').selectedOptions[0].text;
+        const title = `Class Routine (${selectedClassText})`;
+
+        doc.setFontSize(18);
+        doc.text(schoolName, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+        doc.setFontSize(14);
+        doc.text(title, doc.internal.pageSize.getWidth() / 2, 30, { align: 'center' });
+
+        const days = ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+        const head = [['Time', ...days]];
+        
+        let schedules = Object.values(appState.schedules || {});
+        const filterValue = document.getElementById('routineFilter').value;
+        if (filterValue !== 'all') {
+            const [className, section] = filterValue.split('___');
+            schedules = schedules.filter(s => s.className === className && s.section === section);
+        }
+
+        const timeSlots = [...new Set(schedules.map(s => `${s.startTime} - ${s.endTime}`))].sort();
+        const body = [];
+
+        timeSlots.forEach(slot => {
+            const row = [slot];
+            for (let i = 0; i < days.length; i++) {
+                const scheduleForSlotAndDay = schedules.find(s => `${s.startTime} - ${s.endTime}` === slot && parseInt(s.day) === i);
+                if (scheduleForSlotAndDay) {
+                    const teacherName = appState.teachers[scheduleForSlotAndDay.teacherId]?.name || '';
+                    row.push(`${scheduleForSlotAndDay.subject}\n${teacherName}`);
+                } else {
+                    row.push('');
+                }
+            }
+            body.push(row);
+        });
+        
+        doc.autoTable({
+            head: head,
+            body: body,
+            startY: 40,
+            theme: 'grid',
+            styles: { halign: 'center' },
+        });
+
+        doc.save(`Class-Routine-${selectedClassText}.pdf`);
+    }
+
+
 </script>
-</body>
 </html>
